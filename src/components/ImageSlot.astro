@@ -1,0 +1,10 @@
+---
+interface Props {
+  label?: string;
+}
+const { label } = Astro.props;
+---
+
+<div class="bvg-image-slot">
+  {label && <div class="bvg-image-slot-inner">{label}</div>}
+</div>

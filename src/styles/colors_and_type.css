@@ -1,0 +1,217 @@
+/* ============================================================
+   Bruna Portfolio — Colors & Type
+   Fonts loaded via Fontsource in Base.astro
+   ============================================================ */
+
+:root {
+  /* -------------- LIGHT THEME (default) -------------- */
+  --color-bg:                 #F7EDDC;
+  --color-surface:            #EDD8BC;
+  --color-surface-elevated:   #DFC09A;
+  --color-border:             #C8A070;
+
+  --color-text-primary:       #1C0C06;
+  --color-text-secondary:     #8A6040;
+  --color-text-muted:         #C8A070;
+
+  --color-accent-primary:     #4A5CFA;
+  --color-accent-secondary:   #6B1212;
+  --color-accent-highlight:   #EDD87A;
+  --color-accent-cool:        #A8C4E8;
+
+  --color-tag-fg-light:       #6B1212;
+  --color-tag-bg-light:       rgba(107,18,18,0.0706);
+  --color-tag-border-light:   rgba(107,18,18,0.1569);
+
+  --font-display: "DM Serif Display", "Playfair Display", Georgia, serif;
+  --font-sans:    "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  --type-display-hero-size:    56px;
+  --type-display-hero-lh:      1.05;
+  --type-display-hero-track:   -0.030em;
+
+  --type-display-section-size: 36px;
+  --type-display-section-lh:   1.05;
+  --type-display-section-track:-0.030em;
+
+  --type-display-card-size:    20px;
+  --type-display-card-lh:      1.15;
+  --type-display-card-track:   -0.020em;
+
+  --type-quote-size:           28px;
+  --type-quote-lh:             1.3;
+
+  --type-body-lg-size:         15px;
+  --type-body-lg-lh:           1.6;
+
+  --type-body-size:            13px;
+  --type-body-lh:              1.6;
+
+  --type-nav-size:             12px;
+  --type-nav-lh:               1;
+  --type-nav-track:            0.020em;
+
+  --type-button-size:          11px;
+  --type-button-lh:            1;
+  --type-button-track:         0.100em;
+
+  --type-eyebrow-size:         10px;
+  --type-eyebrow-lh:           1;
+  --type-eyebrow-track:        0.160em;
+
+  --type-card-type-size:       9px;
+  --type-card-type-lh:         1;
+  --type-card-type-track:      0.160em;
+
+  --type-caption-size:         11px;
+  --type-caption-lh:           1.4;
+
+  --radius-pill:   999px;
+  --radius-lg:     16px;
+  --radius-md:     14px;
+  --radius-sm:     8px;
+  --radius-xs:     5px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+}
+
+/* -------------- DARK THEME -------------- */
+:root[data-theme="dark"] {
+  --color-bg:                 #1A0C07;
+  --color-surface:            #2A1409;
+  --color-surface-elevated:   #3A1E0E;
+  --color-border:             #5A3020;
+
+  --color-text-primary:       #F7EDDC;
+  --color-text-secondary:     #8A6040;
+  --color-text-muted:         #3A1E0E;
+
+  --color-accent-primary:     #A8C4E8;
+  --color-accent-secondary:   #EDD87A;
+  --color-accent-highlight:   #EDD87A;
+  --color-accent-cool:        #A8C4E8;
+
+  --color-tag-fg-light:       #EDD87A;
+  --color-tag-bg-light:       rgba(237,216,122,0.0784);
+  --color-tag-border-light:   rgba(237,216,122,0.1882);
+}
+
+/* ============================================================
+   Semantic element styles
+   ============================================================ */
+html { color-scheme: light dark; }
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-lh);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1, .type-display-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-display-hero-size);
+  line-height: var(--type-display-hero-lh);
+  letter-spacing: var(--type-display-hero-track);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+h2, .h2, .type-display-section {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-display-section-size);
+  line-height: var(--type-display-section-lh);
+  letter-spacing: var(--type-display-section-track);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+h3, .h3, .type-display-card {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--type-display-card-size);
+  line-height: var(--type-display-card-lh);
+  letter-spacing: var(--type-display-card-track);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+blockquote, .type-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--type-quote-size);
+  line-height: var(--type-quote-lh);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+p, .type-body {
+  font-family: var(--font-sans);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-lh);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.type-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--type-body-lg-size);
+  line-height: var(--type-body-lg-lh);
+  color: var(--color-text-primary);
+}
+
+.type-nav {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--type-nav-size);
+  line-height: var(--type-nav-lh);
+  letter-spacing: var(--type-nav-track);
+}
+
+.type-button {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--type-button-size);
+  line-height: var(--type-button-lh);
+  letter-spacing: var(--type-button-track);
+  text-transform: uppercase;
+}
+
+.type-eyebrow {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--type-eyebrow-size);
+  line-height: var(--type-eyebrow-lh);
+  letter-spacing: var(--type-eyebrow-track);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.type-card-type {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--type-card-type-size);
+  line-height: var(--type-card-type-lh);
+  letter-spacing: var(--type-card-type-track);
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+.type-caption {
+  font-family: var(--font-sans);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-lh);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,47 @@
+---
+const formId = import.meta.env.PUBLIC_FORMSPREE_ID;
+---
+
+<form
+  action={formId ? `https://formspree.io/f/${formId}` : '#'}
+  method="POST"
+  class="bvg-form"
+>
+  <input type="hidden" name="_subject" value="New message via brunavizagomes.com" />
+  <input type="hidden" name="_next" value="/thanks" />
+  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+  <div class="bvg-field">
+    <label>
+      <span class="bvg-field-label">Name</span>
+      <input type="text" name="name" required placeholder="Your name" />
+    </label>
+  </div>
+
+  <div class="bvg-field">
+    <label>
+      <span class="bvg-field-label">Email</span>
+      <input type="email" name="email" required placeholder="you@example.com" />
+    </label>
+  </div>
+
+  <div class="bvg-field">
+    <label>
+      <span class="bvg-field-label">What are you working on?</span>
+      <textarea name="message" rows="5" required placeholder="A short sentence is fine. I read every one."></textarea>
+    </label>
+  </div>
+
+  <div class="bvg-form-action">
+    <button type="submit" class="bvg-btn-primary">
+      Send Message
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="13,6 19,12 13,18"/>
+      </svg>
+    </button>
+    <p class="bvg-form-caption">
+      Or email <a href="mailto:creations.by.bu@gmail.com">creations.by.bu@gmail.com</a>
+    </p>
+  </div>
+</form>

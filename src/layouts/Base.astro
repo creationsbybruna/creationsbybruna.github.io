@@ -1,0 +1,77 @@
+---
+import '@fontsource/dm-serif-display/400.css';
+import '@fontsource/dm-serif-display/400-italic.css';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/700.css';
+import '../styles/colors_and_type.css';
+import '../styles/portfolio.css';
+import TopBar from '../components/TopBar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogTitle?: string;
+}
+
+const {
+  title,
+  description = 'Senior Product Manager & Designer portfolio — Bruna Viza Gomes.',
+  ogTitle,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+
+    <!-- OG -->
+    <meta property="og:title" content={ogTitle ?? title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/monogram.svg" />
+
+    <!-- Theme: set data-theme before paint to avoid FOUC -->
+    <script is:inline>
+      (function () {
+        const stored = localStorage.getItem('bvg-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="bvg-app">
+      <TopBar />
+      <slot />
+      <Footer />
+    </div>
+
+    <!-- Theme toggle script -->
+    <script>
+      const toggle = document.getElementById('bvg-theme-toggle');
+      const label = document.getElementById('bvg-theme-label');
+
+      function syncLabel() {
+        if (label) label.textContent = document.documentElement.dataset.theme === 'dark' ? 'Light' : 'Dark';
+      }
+
+      syncLabel();
+
+      toggle?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('bvg-theme', next);
+        syncLabel();
+      });
+    </script>
+  </body>
+</html>
