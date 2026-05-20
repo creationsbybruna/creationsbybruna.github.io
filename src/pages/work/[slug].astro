@@ -1,0 +1,215 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import EyebrowTag from '../../components/EyebrowTag.astro';
+import ImageSlot from '../../components/ImageSlot.astro';
+import PersonaCard from '../../components/PersonaCard.astro';
+import ProblemBlock from '../../components/ProblemBlock.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work');
+  return entries.map(entry => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const d = entry.data;
+
+// Group sections by their 'group' field for phase rendering
+type Section = NonNullable<typeof d.sections>[number];
+const phaseGroups: { group: string; sections: Section[] }[] = [];
+if (d.sections) {
+  for (const section of d.sections) {
+    const last = phaseGroups[phaseGroups.length - 1];
+    if (last && last.group === section.group) {
+      last.sections.push(section);
+    } else {
+      phaseGroups.push({ group: section.group, sections: [section] });
+    }
+  }
+}
+---
+
+<Base
+  title={`${d.cardTitle} — Bruna Viza Gomes`}
+  description={d.cardBody}
+  ogTitle={d.cardTitle}
+>
+  <main class="bvg-page">
+
+    <!-- Header -->
+    <div class="bvg-page-header-cs">
+      <a href="/" class="bvg-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="11,18 5,12 11,6"/>
+        </svg>
+        Back to Work
+      </a>
+
+      <div class="bvg-cs-label">
+        <span class="bvg-cs-case">{d.case}</span>
+        <span aria-hidden="true">·</span>
+        <span class="bvg-cs-label-text">{d.label}</span>
+      </div>
+
+      <div class="bvg-cs-industry-row">
+        <EyebrowTag industry={d.industry} />
+      </div>
+
+      <h1 class="bvg-cs-title">{d.cardTitle}</h1>
+
+      <div class="bvg-meta-row">
+        <div class="bvg-meta-item">
+          <span class="bvg-meta-lbl">Industry</span>
+          <span class="bvg-meta-val">[{d.industry}]</span>
+        </div>
+        <div class="bvg-meta-item">
+          <span class="bvg-meta-lbl">Role</span>
+          <span class="bvg-meta-val">{d.role}</span>
+        </div>
+        <div class="bvg-meta-item">
+          <span class="bvg-meta-lbl">Platforms</span>
+          <span class="bvg-meta-val">{d.platforms}</span>
+        </div>
+        <div class="bvg-meta-item">
+          <span class="bvg-meta-lbl">Timeline</span>
+          <span class="bvg-meta-val">{d.timeline}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cover image -->
+    <div class="bvg-cs-cover-image">
+      <ImageSlot label={`${entry.slug} · cover · 16:9`} />
+    </div>
+
+    {d.fullCase ? (
+      <>
+        <!-- Overview -->
+        {d.overview && (
+          <section class="bvg-section" aria-label="Project overview">
+            <div class="bvg-cs-overview-grid">
+              <div class="bvg-eyebrow">Project Overview</div>
+              <div class="bvg-cs-overview-body">
+                {d.overview.map((para, i) => (
+                  <p class="bvg-cs-lede">{para}</p>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        <!-- Problem statement -->
+        {d.problem && (
+          <div class="bvg-cs-problem-section">
+            <ProblemBlock
+              body={d.problem.body}
+              emphasis={d.problem.emphasis}
+              after={d.problem.after}
+            />
+          </div>
+        )}
+
+        <!-- Personas -->
+        {d.personas && d.personas.length > 0 && (
+          <section class="bvg-section" aria-label="Target personas">
+            <div class="bvg-section-head">
+              <div class="bvg-eyebrow">Who I Designed For</div>
+              <h2 class="bvg-section-title">Target Personas &amp; Their Key Frustrations</h2>
+            </div>
+            <div class={`bvg-persona-grid${d.personas.length === 1 ? ' is-one' : ''}`}>
+              {d.personas.map(p => (
+                <PersonaCard name={p.name} blurb={p.blurb} frustrations={p.frustrations} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Use cases -->
+        {d.useCases && d.useCases.length > 0 && (
+          <section class="bvg-section" aria-label="Target use cases">
+            <div class="bvg-section-head">
+              <div class="bvg-eyebrow">Where This Shows Up</div>
+              <h2 class="bvg-section-title">Target Use Cases</h2>
+            </div>
+            <div class="bvg-usecase-list">
+              {d.useCases.map(([label, body]) => (
+                <div class="bvg-usecase">
+                  <div class="bvg-usecase-label">{label}</div>
+                  <div class="bvg-usecase-body">{body}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Numbered sections grouped by phase -->
+        {phaseGroups.map((phase, pi) => (
+          <section class="bvg-phase-group" aria-label={phase.group}>
+            <div class="bvg-phase-head">
+              <div class="bvg-eyebrow">Phase {String(pi + 1).padStart(2, '0')}</div>
+              <h2 class="bvg-phase-title">{phase.group}</h2>
+            </div>
+            <div class="bvg-numbered-list">
+              {phase.sections.map(s => (
+                <div class="bvg-numbered">
+                  <div class="bvg-numbered-head">
+                    <span class="bvg-numbered-num">[{s.number}]</span>
+                  </div>
+                  <h3 class="bvg-numbered-title">{s.title}</h3>
+                  <div class="bvg-numbered-body">
+                    {s.paragraphs?.map(p => <p>{p}</p>)}
+                    {s.bullets && s.bullets.length > 0 && (
+                      <ul class="bvg-solution-list">
+                        {s.bullets.map(([label, body]) => (
+                          <li>
+                            <span class="bvg-bullet-label">{label}.</span>
+                            {' '}{body}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  {s.imageLabel && (
+                    <div class="bvg-numbered-image">
+                      <ImageSlot label={s.imageLabel} />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </>
+    ) : (
+      <!-- Stub -->
+      <div class="bvg-stub">
+        <EyebrowTag industry={d.industry} />
+        <h2 class="bvg-stub-title">Write-up in progress.</h2>
+        <p class="bvg-stub-body">
+          This case study is being written up. Check back soon, or <a href="/contact" style="color: var(--color-accent-primary);">reach out</a> if you'd like to hear about it directly.
+        </p>
+      </div>
+    )}
+
+    <!-- Next case study -->
+    {d.nextCaseSlug && d.nextCaseTitle && (
+      <div class="bvg-cs-next">
+        <div class="bvg-eyebrow">Next Case Study</div>
+        <a href={`/work/${d.nextCaseSlug}`} class="bvg-next-link">
+          <div>
+            {d.nextCaseLabel && <div class="bvg-next-case">{d.nextCaseLabel}</div>}
+            <div class="bvg-next-title">{d.nextCaseTitle}</div>
+          </div>
+          <span class="bvg-next-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7,7 17,7 17,17"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    )}
+
+  </main>
+</Base>

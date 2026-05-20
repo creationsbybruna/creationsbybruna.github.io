@@ -1,0 +1,15 @@
+---
+interface Props {
+  body: string;
+  emphasis: string;
+  after?: string;
+}
+const { body, emphasis, after } = Astro.props;
+---
+
+<div class="bvg-problem">
+  <div class="bvg-eyebrow">Problem Statement</div>
+  <p class="bvg-problem-body">
+    {body}{emphasis ? <> <b class="bvg-problem-em">{emphasis}</b></> : null}{after ? ` ${after}` : ''}
+  </p>
+</div>

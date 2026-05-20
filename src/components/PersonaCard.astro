@@ -1,0 +1,27 @@
+---
+interface Props {
+  name: string;
+  blurb: string;
+  frustrations: [string, string][];
+}
+const { name, blurb, frustrations } = Astro.props;
+---
+
+<div class="bvg-persona">
+  <div class="bvg-persona-head">
+    <div class="bvg-eyebrow">Persona</div>
+    <h4 class="bvg-persona-name">{name}</h4>
+    <p class="bvg-persona-blurb">{blurb}</p>
+  </div>
+  <div class="bvg-persona-frust">
+    <div class="bvg-eyebrow">Key Frustrations</div>
+    <ul class="bvg-frust-list">
+      {frustrations.map(([label, body]) => (
+        <li>
+          <span class="bvg-frust-label">{label}.</span>
+          <span class="bvg-frust-body"> {body}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

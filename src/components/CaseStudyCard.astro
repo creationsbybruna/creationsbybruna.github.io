@@ -1,0 +1,43 @@
+---
+import ImageSlot from './ImageSlot.astro';
+
+interface Props {
+  slug: string;
+  industry: string;
+  cardTitle: string;
+  cardBody: string;
+  tags: string[];
+  role: string;
+  wide?: boolean;
+}
+
+const { slug, industry, cardTitle, cardBody, tags, role, wide = false } = Astro.props;
+---
+
+<a href={`/work/${slug}`} class={`bvg-card${wide ? ' is-wide' : ''}`}>
+  <div class="bvg-card-image">
+    <ImageSlot label={`${slug} · cover`} />
+    <span class="bvg-card-industry">[{industry}]</span>
+  </div>
+  <div class="bvg-card-body">
+    <h3 class="bvg-card-title">{cardTitle}</h3>
+    <p class="bvg-card-text">{cardBody}</p>
+    <div class="bvg-card-tags">
+      {tags.map((tag, i) => (
+        <>
+          {i > 0 && <span class="bvg-sep" aria-hidden="true">·</span>}
+          <span>{tag}</span>
+        </>
+      ))}
+    </div>
+    <div class="bvg-card-meta">
+      <span>{role}</span>
+      <span class="bvg-card-arrow" aria-hidden="true">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="7" y1="17" x2="17" y2="7"/>
+          <polyline points="7,7 17,7 17,17"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+</a>

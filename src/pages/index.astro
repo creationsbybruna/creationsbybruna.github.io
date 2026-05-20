@@ -1,0 +1,89 @@
+---
+import Base from '../layouts/Base.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import { getCollection } from 'astro:content';
+
+const allWork = await getCollection('work');
+const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf'];
+const projects = order.map(id => allWork.find(e => e.data.id === id)!);
+---
+
+<Base title="Bruna Viza Gomes — Senior Product Manager & Designer">
+  <main class="bvg-page">
+
+    <!-- Hero -->
+    <section class="bvg-hero" aria-label="Introduction">
+      <div class="bvg-hero-greeting">
+        <span class="bvg-wave" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3"/>
+            <path d="M3 17c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3" opacity="0.6"/>
+          </svg>
+        </span>
+        <span>
+          Oi, I'm Bruna! Senior Product Manager &amp; Designer
+          <span class="bvg-hero-at">@ Impact Observatory</span>
+        </span>
+      </div>
+
+      <h1 class="bvg-hero-title">
+        Bridging design and product to build things people <em>actually</em> want to use.
+      </h1>
+
+      <p class="bvg-hero-sub">
+        I work at the intersection of user research, product strategy, and hands-on design — translating messy real-world problems into clear, functional solutions. My background in design keeps me honest about what "done" really means.
+      </p>
+
+      <div class="bvg-hero-ctas">
+        <a href="/contact" class="bvg-btn-primary">
+          Let's Connect
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="13,6 19,12 13,18"/>
+          </svg>
+        </a>
+        <a href="/about" class="bvg-btn-ghost">More About Me</a>
+      </div>
+    </section>
+
+    <!-- Case studies -->
+    <section class="bvg-section" aria-label="Selected work">
+      <div class="bvg-section-head">
+        <div class="bvg-eyebrow">Selected Work · 2018 – Present</div>
+        <h2 class="bvg-section-title">Case Studies</h2>
+      </div>
+
+      <div class="bvg-card-grid">
+        {projects.map((entry, i) => (
+          <CaseStudyCard
+            slug={entry.slug}
+            industry={entry.data.industry}
+            cardTitle={entry.data.cardTitle}
+            cardBody={entry.data.cardBody}
+            tags={entry.data.tags}
+            role={entry.data.role}
+            wide={i === 0}
+          />
+        ))}
+      </div>
+    </section>
+
+    <!-- About snippet -->
+    <section class="bvg-about-snippet" aria-label="About">
+      <div class="bvg-about-snippet-inner">
+        <div class="bvg-eyebrow">About</div>
+        <p class="bvg-about-snippet-body">
+          I'm a senior product manager and designer creating effective strategies and clean design solutions — grounded in research and driven by outcomes.
+        </p>
+        <a href="/about" class="bvg-link-arrow">
+          More About Me
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"/>
+            <polyline points="13,6 19,12 13,18"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+  </main>
+</Base>
