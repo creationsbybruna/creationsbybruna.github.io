@@ -90,6 +90,7 @@
 .bvg-page-lede  { font-size: 15px; line-height: 1.6; color: var(--color-text-primary); margin: 22px 0 0; max-width: 60ch; }
 
 .bvg-section { padding: 80px 0 0; }
+.bvg-section--surface { background: color-mix(in srgb, var(--color-surface) 35%, var(--color-bg)); margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); padding: 80px calc(50vw - 50%) 80px; }
 .bvg-section-head { margin-bottom: 36px; max-width: 780px; }
 .bvg-section-title { font-family: var(--font-display); font-size: 40px; line-height: 1.05; letter-spacing: -0.030em; margin: 12px 0 0; }
 
@@ -296,9 +297,11 @@
 .bvg-exp-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-border); }
 .bvg-exp-row {
   display: grid; grid-template-columns: 220px 1fr; gap: 32px;
-  padding: 24px 0 26px;
+  padding: 24px 0 26px 20px;
+  border-left: 2px solid transparent;
   border-bottom: 1px solid var(--color-border);
 }
+.bvg-exp-row.is-current { border-left: 2px solid transparent; background: transparent; }
 .bvg-exp-range {
   font-family: var(--font-sans); font-weight: 700; font-size: 10px;
   letter-spacing: 0.160em; text-transform: uppercase;
@@ -309,6 +312,28 @@
 .bvg-exp-company { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.020em; color: var(--color-text-primary); }
 .bvg-exp-title { font-family: var(--font-sans); font-weight: 500; font-size: 14px; color: var(--color-text-secondary); }
 .bvg-exp-body { font-size: 14px; line-height: 1.6; color: var(--color-text-primary); margin: 10px 0 0; max-width: 64ch; }
+.bvg-exp-bullets { list-style: none; margin: 10px 0 0; padding-left: 0; display: flex; flex-direction: column; gap: 6px; max-width: 64ch; }
+.bvg-exp-bullets li { font-size: 14px; line-height: 1.6; color: var(--color-text-primary); position: relative; padding-left: 22px; }
+.bvg-exp-bullets li::before { content: '〰'; position: absolute; left: 0; top: 0; color: var(--color-accent-primary); font-size: 13px; line-height: 1.8; -webkit-text-stroke: 0.6px var(--color-accent-primary); }
+.bvg-exp-current-badge { display: inline-block; margin-top: 6px; padding: 2px 8px; border-radius: 100px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: color-mix(in srgb, var(--color-accent-primary) 12%, transparent); color: var(--color-accent-primary); border: 1px solid color-mix(in srgb, var(--color-accent-primary) 25%, transparent); }
+
+.bvg-exp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+.bvg-exp-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 24px 28px 26px;
+}
+.bvg-exp-card .bvg-exp-range {
+  margin-bottom: 10px;
+}
+.bvg-exp-card .bvg-exp-role {
+  margin-bottom: 6px;
+}
 
 .bvg-about-cta {
   border-top: 1px solid var(--color-border);

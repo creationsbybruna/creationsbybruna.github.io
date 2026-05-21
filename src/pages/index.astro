@@ -6,6 +6,18 @@ import { getCollection } from 'astro:content';
 const allWork = await getCollection('work');
 const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf'];
 const projects = order.map(id => allWork.find(e => e.data.id === id)!);
+
+const experience = [
+  {
+    company: 'Impact Observatory',
+    role: 'Senior Product Manager & Designer',
+    range: 'Apr 2024 – Present',
+    body: 'Led the build and launch of one of the first geospatial LLM platform prototypes in the industry, directly contributing to multiple company funding opportunities.',
+  },
+  { company: 'Impact Observatory', role: 'UX Designer', range: 'Jan 2021 – Apr 2024', body: '' },
+  { company: 'Trilogy Education', role: 'Assistant UX/UI Instructor', range: 'Aug 2021 – Feb 2022', body: '' },
+  { company: 'National Geographic Society', role: 'UX Designer', range: 'Jun 2018 – Jan 2021', body: '' },
+];
 ---
 
 <Base title="Bruna Viza Gomes — Senior Product Manager & Designer">
@@ -64,6 +76,28 @@ const projects = order.map(id => allWork.find(e => e.data.id === id)!);
             role={entry.data.role}
             wide={i === 0}
           />
+        ))}
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="bvg-section" aria-label="Experience">
+      <div class="bvg-section-head">
+        <div class="bvg-eyebrow">Experience</div>
+      </div>
+      <div class="bvg-exp-grid">
+        {experience.map(e => (
+          <div class="bvg-exp-card">
+            <div class="bvg-exp-range">{e.range}</div>
+            <div>
+              <div class="bvg-exp-role">
+                <span class="bvg-exp-company">{e.company}</span>
+                <span aria-hidden="true">·</span>
+                <span class="bvg-exp-title">{e.role}</span>
+              </div>
+              {e.body && <p class="bvg-exp-body">{e.body}</p>}
+            </div>
+          </div>
         ))}
       </div>
     </section>
