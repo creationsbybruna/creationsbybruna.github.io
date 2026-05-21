@@ -5,23 +5,23 @@ import ImageSlot from '../components/ImageSlot.astro';
 const specialties = [
   {
     num: '01',
-    title: 'Design & Technical Fluency',
-    body: 'I design end-to-end — from early research and wireframes through final UI — and I can implement what I design. My computer science background means I understand the constraints engineers are working within, which makes collaboration faster and handoffs cleaner.',
+    title: 'Technical & Design Fluency',
+    body: 'Leading end-to-end design efforts and briging clearly cultivated UX implementations life.',
   },
   {
     num: '02',
-    title: 'Root-Cause Problem Solving',
-    body: "I don’t start with solutions. I start with “why is this actually happening?” and I follow that thread until the real problem is clear. That instinct comes from years of user research and has shaped how I approach both design and product work.",
+    title: 'Problem-Solving Expertise',
+    body: 'Identifying the why to transform challenges into simple, impactful solutions.',
   },
   {
     num: '03',
-    title: 'Cross-Functional Leadership',
-    body: "I’ve led product direction, facilitated company-wide workshops, managed stakeholder alignment, and navigated the space between design, engineering, and executive teams. I know how to move a room toward a shared decision and keep everyone oriented around the user.",
+    title: 'Leadership in Strategic Design',
+    body: 'Guiding teams and product vision through user-centered design thinking and clear problem definition.',
   },
   {
     num: '04',
-    title: 'Collaborative Process Building',
-    body: "Good products require good process. I’ve introduced agile development practices from scratch, run persona definition initiatives, and built the kind of shared language teams need to make consistent decisions. I think as much about how teams work as I do about what they build.",
+    title: 'Collaborative Inovation',
+    body: 'Driving cross-team workshops leading to staff centered aligned processes company-wide.',
   },
 ];
 
@@ -29,17 +29,38 @@ const experience = [
   {
     company: 'Impact Observatory',
     role: 'Senior Product Manager & Designer',
-    range: 'Apr 2024 – Present',
-    body: 'Led the build and launch of one of the first geospatial LLM platform prototypes in the industry, directly contributing to multiple company funding opportunities.',
+    range: 'Jan 2021 – Present',
+    current: true,
+    bullets: [
+      'Led the 0 → 1 launch of one of the first geospatial LLM platform prototypes available in the geospatial analysis field, directly contributing to multiple company funding opportunities.',
+      'Wrote system prompts, built agentic workflows, developed QA test pairs, and designed the full design system and end-to-end UX/UI for the same product.',
+      'Conducted user and market studies to establish target user groups, define a go-to-market plan, and structure B2B contract opportunities as well as a tiered membership model.',
+    ],
   },
-  { company: 'Impact Observatory', role: 'UX Designer', range: 'Jan 2021 – Apr 2024', body: '' },
-  { company: 'Trilogy Education', role: 'Assistant UX/UI Instructor', range: 'Aug 2021 – Feb 2022', body: '' },
-  { company: 'National Geographic Society', role: 'UX Designer', range: 'Jun 2018 – Jan 2021', body: '' },
+  {
+    company: 'Trilogy Education',
+    role: 'Assistant UX/UI Instructor',
+    range: 'Aug 2021 – Feb 2022',
+    bullets: [
+      'Mentored students in the UX field by establishing an environment where students felt comfortable freely participating and receiving constructive feedback.',
+      'Provided career-centered guidance to help students translate classroom learning into industry-ready skills, building their confidence to make a positive impact from day one.',
+    ],
+  },
+  {
+    company: 'National Geographic Society',
+    role: 'UX Designer',
+    range: 'Jun 2018 – Jan 2021',
+    bullets: [
+      'Led the redesign of the resource library search, home pages, and individual asset pages by integrating user research insights, resulting in enhanced user experience and engagement. Recognized with a Webby Award.',
+      'Conducted comprehensive user research and developed innovative design solutions for conservation-driven platforms.',
+      'Designed global features (site-wide navigation and profile platform), facilitating seamless communication across all National Geographic Society platforms and improving user interaction and information accessibility.',
+    ],
+  },
 ];
 ---
 
 <Base
-  title="About — Bruna Viza Gomes"
+  title="About | Bruna Viza Gomes"
   description="Senior product manager and designer based on the US East Coast. Previously National Geographic Society; now Impact Observatory."
 >
   <main class="bvg-page">
@@ -48,20 +69,25 @@ const experience = [
     <section aria-label="Bio">
       <div class="bvg-about">
         <div class="bvg-about-portrait">
-          <ImageSlot label="Portrait · 1:1" />
+          <img
+            src="https://framerusercontent.com/images/MO0hVIQNai0NYfIXIHhUVKds.jpg?scale-down-to=1024&width=2504&height=3338"
+            alt="Portrait of Bruna Gomes"
+            class="bvg-about-portrait-img"
+          />
         </div>
         <div class="bvg-about-body">
           <div class="bvg-eyebrow">About</div>
-          <h1 class="bvg-h1-about">Oi! I'm Bruna Gomes — senior product manager and designer based on the US East Coast.</h1>
+          <h1 class="bvg-h1-about">Oi! I'm Bruna Gomes, senior product manager and designer based on the US East Coast.</h1>
+          <p class="bvg-about-tagline">Previously National Geographic Society; now Impact Observatory.</p>
 
           <p class="bvg-body-lg">
-            I started at American University studying computer science and graphic design, looking for a way to do both at once. Turns out that crossover has a name: UX. I spent three years at <strong>National Geographic Society</strong> honing my craft as a UX designer, working on the education platform and earning a Webby Award along the way.
+            I started my journey at American University, where I studied computer science and graphic design. After finding a way to bridge the two studies, I joined <strong>National Geographic Society</strong> and spent 3 years working and refining my skills as a UX designer.
           </p>
           <p class="bvg-body-lg">
-            In 2021 I joined <strong>Impact Observatory</strong>, a geospatial data company, initially as a product designer. Over time I recognized that the real work wasn't just designing solutions. It was defining the right problems in the first place. That's what pulled me into product management. Today my role spans product strategy, user research, interface design, and enough front-end development to build and ship what I design.
+            I then joined and have continued to work the past 5 years at <strong>Impact Observatory</strong> (IO) as a senior product member. I initially joined IO as a product designer, and have since been expanding my knowledge to also encompass product management. My typical work day ranges from driving company alignment and product direction, leading user research and interface design efforts, and applying my computer science background to the front-end development of our company website.
           </p>
           <p class="bvg-body-lg">
-            When I'm not working, you'll find me surfing, shaping surfboards, exploring new cafes and bookstores, or somewhere I've never been before.
+            When I'm not working, you'll find me surfing, shaping surfboards, creating new ceramics, or checking out new cafes.
           </p>
         </div>
       </div>
@@ -85,22 +111,29 @@ const experience = [
     </section>
 
     <!-- Experience -->
-    <section class="bvg-section" aria-label="Experience">
+    <section class="bvg-section bvg-section--surface" aria-label="Experience">
       <div class="bvg-section-head">
         <div class="bvg-eyebrow">Experience</div>
         <h2 class="bvg-section-title">Where I've Worked</h2>
       </div>
       <ul class="bvg-exp-list">
         {experience.map(e => (
-          <li class="bvg-exp-row">
-            <div class="bvg-exp-range">{e.range}</div>
+          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`}>
+            <div class="bvg-exp-range">
+              {e.range}
+              {e.current && <span class="bvg-exp-current-badge">Current</span>}
+            </div>
             <div>
               <div class="bvg-exp-role">
                 <span class="bvg-exp-company">{e.company}</span>
                 <span aria-hidden="true">·</span>
                 <span class="bvg-exp-title">{e.role}</span>
               </div>
-              {e.body && <p class="bvg-exp-body">{e.body}</p>}
+              {e.bullets && e.bullets.length > 0 && (
+                <ul class="bvg-exp-bullets">
+                  {e.bullets.map(b => <li>{b}</li>)}
+                </ul>
+              )}
             </div>
           </li>
         ))}
@@ -111,7 +144,7 @@ const experience = [
     <section class="bvg-about-cta" aria-label="Contact CTA">
       <h2 class="bvg-cta-title">Working on something interesting?</h2>
       <p class="bvg-cta-body">
-        Open to senior PM and design roles, product discovery engagements, and longer-form consulting. If the work is interesting, let's talk.
+        Open to senior PM and design roles, product discovery engagements, and consulting. If the work sounds good, let's talk.
       </p>
       <a href="/contact" class="bvg-btn-primary">
         Let's Connect
