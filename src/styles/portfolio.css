@@ -573,6 +573,38 @@
   .bvg-footer-meta { display: none; }
 }
 
+/* -------------------- Contact page footer (dark theme) -------------------- */
+html[data-theme="light"] .bvg-footer {
+  background: #1A0C07;
+  color: #F7EDDC;
+  border-top-color: #5A3020;
+}
+html[data-theme="light"] .bvg-footer-eyebrow {
+  color: #8A6040;
+}
+html[data-theme="light"] .bvg-footer-email {
+  color: #F7EDDC;
+  border-bottom-color: #5A3020;
+}
+html[data-theme="light"] .bvg-footer-email:hover {
+  color: #A8C4E8;
+}
+html[data-theme="light"] .bvg-footer-mark {
+  color: #F7EDDC;
+}
+html[data-theme="light"] .bvg-footer-meta {
+  color: #3A1E0E;
+}
+html[data-theme="light"] .bvg-footer-links {
+  color: #8A6040;
+}
+html[data-theme="light"] .bvg-footer-links a {
+  color: #F7EDDC;
+}
+html[data-theme="light"] .bvg-footer-links a:hover {
+  color: #A8C4E8;
+}
+
 /* -------------------- Reduced motion -------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; }
