@@ -550,7 +550,6 @@
 }
 .bvg-carousel-dot.is-active { background: var(--color-accent-primary); transform: scale(1.4); }
 
-
 /* Next case study */
 .bvg-cs-next { display: flex; flex-direction: column; gap: 16px; padding-top: 96px; }
 .bvg-next-link {
