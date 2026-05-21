@@ -1,0 +1,69 @@
+---
+import ImageSlot from './ImageSlot.astro';
+
+interface Props {
+  images: string[];
+  id: string;
+}
+
+const { images, id } = Astro.props;
+---
+
+<div class="bvg-carousel" id={id} data-count={images.length}>
+  <div class="bvg-carousel-track">
+    {images.map((label, i) => (
+      <div class="bvg-carousel-slide" data-index={i} aria-hidden={i !== 0 ? 'true' : 'false'}>
+        <ImageSlot label={label} />
+      </div>
+    ))}
+  </div>
+
+  {images.length > 1 && (
+    <div class="bvg-carousel-controls">
+      <button class="bvg-carousel-btn bvg-carousel-prev" aria-label="Previous image" data-carousel={id}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="11,18 5,12 11,6"/>
+        </svg>
+      </button>
+      <div class="bvg-carousel-dots">
+        {images.map((_, i) => (
+          <button class={`bvg-carousel-dot${i === 0 ? ' is-active' : ''}`} aria-label={`Go to image ${i + 1}`} data-carousel={id} data-dot={i} />
+        ))}
+      </div>
+      <button class="bvg-carousel-btn bvg-carousel-next" aria-label="Next image" data-carousel={id}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="13,6 19,12 13,18"/>
+        </svg>
+      </button>
+    </div>
+  )}
+</div>
+
+<script>
+  function initCarousel(id: string) {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const slides = el.querySelectorAll<HTMLElement>('.bvg-carousel-slide');
+    const dots = el.querySelectorAll<HTMLElement>('.bvg-carousel-dot');
+    let current = 0;
+
+    function goTo(index: number) {
+      slides[current].setAttribute('aria-hidden', 'true');
+      dots[current]?.classList.remove('is-active');
+      current = (index + slides.length) % slides.length;
+      slides[current].setAttribute('aria-hidden', 'false');
+      dots[current]?.classList.add('is-active');
+    }
+
+    el.querySelector('.bvg-carousel-prev')?.addEventListener('click', () => goTo(current - 1));
+    el.querySelector('.bvg-carousel-next')?.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+  }
+
+  document.querySelectorAll<HTMLElement>('.bvg-carousel').forEach(el => {
+    if (el.id) initCarousel(el.id);
+  });
+</script>

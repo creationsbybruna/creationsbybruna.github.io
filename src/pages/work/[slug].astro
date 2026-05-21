@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import EyebrowTag from '../../components/EyebrowTag.astro';
 import ImageSlot from '../../components/ImageSlot.astro';
+import Carousel from '../../components/Carousel.astro';
 import PersonaCard from '../../components/PersonaCard.astro';
 import ProblemBlock from '../../components/ProblemBlock.astro';
 import PasswordGate from '../../components/PasswordGate.astro';
@@ -177,11 +178,31 @@ if (d.sections) {
                       <ImageSlot label={s.imageLabel} />
                     </div>
                   )}
+                  {s.processImages && s.processImages.length > 0 && (
+                    <div class="bvg-numbered-carousel">
+                      <Carousel images={s.processImages} id={`carousel-${entry.slug}-${s.number}`} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </section>
         ))}
+        {d.outputImages && d.outputImages.length > 0 && (
+          <section class="bvg-section" aria-label="Final output">
+            <div class="bvg-section-head">
+              <div class="bvg-eyebrow">Final Output</div>
+              <h2 class="bvg-section-title">Design Output</h2>
+            </div>
+            <div class="bvg-output-grid">
+              {d.outputImages.map((label) => (
+                <div class="bvg-output-image">
+                  <ImageSlot label={label} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </>
     ) : (
       <!-- Stub -->

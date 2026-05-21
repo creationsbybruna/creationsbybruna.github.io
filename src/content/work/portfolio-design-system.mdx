@@ -1,0 +1,76 @@
+---
+id: portfolio-design-system
+case: "Side Project"
+label: "Ongoing"
+industry: "Design Systems"
+cardTitle: "The Design System Behind This Portfolio"
+cardBody: "The color tokens, type scale, spacing system, and component library behind this portfolio, documented."
+tags: ["Design Systems", "Visual Design", "Component Design", "Front-End"]
+role: "Designer & Developer"
+platforms: "Web"
+timeline: "2024–2025"
+fullCase: true
+nextCaseSlug: gis-llm
+nextCaseLabel: "Case 01 · [GIS]"
+nextCaseTitle: "Making Geospatial Data Accessible to All with Conversational AI"
+overview:
+  - "Every case study on this site shares the same visual foundation: color tokens, a two-typeface type scale, a spacing system, and a set of components that handle everything from cards to problem blocks to persona grids. This page documents how that system is built."
+  - "I designed this portfolio the same way I'd approach any product. All visual decisions made once, as tokens, and every component built from them. Nothing one-off. Adding a new case study doesn't require re-deciding anything."
+problem:
+  body: "A portfolio that grows one case study at a time, without a defined system, drifts. Spacing accumulates inconsistencies. Colors that almost match start to diverge. The result looks assembled, not designed."
+  emphasis: "A designer's portfolio is also a design artifact. It has to hold up."
+  after: "The answer was to define everything once and let the system do the rest."
+sections:
+  - group: "Color"
+    number: "01"
+    title: "Palette & Tokens"
+    paragraphs:
+      - "The palette runs on a warm neutral base from cream to dark brown, with a cool blue as the primary interactive accent. Burgundy handles secondary labels and tags. Golden yellow is reserved for emphasis highlights inside problem statements. Each value is assigned to a semantic token: bg, surface, surface-elevated, border, text-primary, text-secondary, text-muted."
+      - "Limiting the accent colors to specific roles means the eye builds a vocabulary quickly. Blue is always interactive. Burgundy is always categorical. Yellow always signals emphasis. No color does double duty."
+    imageLabel: "Color tokens · light and dark · full palette"
+  - group: "Color"
+    number: "02"
+    title: "Light & Dark Theme"
+    paragraphs:
+      - "The theme system runs entirely through CSS custom properties scoped to :root. Switching to dark mode swaps the token values, not the references. Every component that uses var(--color-bg) gets the right value automatically."
+      - "The dark theme doesn't simply invert. Warm neutrals shift to cool dark surfaces, and the accent roles swap: blue becomes the primary highlight, yellow takes the interactive role. The hierarchy stays legible in both directions."
+  - group: "Typography"
+    number: "03"
+    title: "Typeface Pairing"
+    paragraphs:
+      - "Two typefaces: DM Serif Display for all display text, Space Grotesk for everything else. DM Serif brings warmth and editorial weight. Space Grotesk is geometric and readable at small sizes without reading as corporate. The contrast between them is the point."
+      - "Because the contrast is clear, display text always reads as display. Body text always reads as body. There's no zone where the two styles compete."
+    imageLabel: "Type pairing · DM Serif Display + Space Grotesk"
+  - group: "Typography"
+    number: "04"
+    title: "Type Scale"
+    paragraphs:
+      - "Seven named steps: display-hero (56px), display-section (36px), display-card (20px), quote (28px italic), body-lg (15px), body (13px), and utility sizes for nav, buttons, eyebrows, and captions. Each step has size, line-height, and letter-spacing locked together as a token."
+      - "Defining those three values as a unit means a body paragraph always has the same rhythm wherever it appears. Nothing is left loose at the point of use."
+  - group: "Spacing & Layout"
+    number: "05"
+    title: "Spacing Scale"
+    paragraphs:
+      - "Eight named steps on a 4px base: 4, 8, 12, 16, 24, 32, 48, and 64px. Every margin, padding, and gap on the site references one of these tokens. Nothing is set to an arbitrary pixel value."
+      - "Page layouts use a 1200px max-width container with 24px horizontal padding on mobile and 48px on desktop. The case study content area uses a two-column overview grid (200px label, 1fr body) and a full-width cover image. The structure is the same across every case."
+    imageLabel: "Spacing scale · 8 steps · 4px base"
+  - group: "Spacing & Layout"
+    number: "06"
+    title: "Radius Scale"
+    paragraphs:
+      - "Five steps: xs (5px) for chips and tags, sm (8px) for compact elements, md (14px) for cards and inputs, lg (16px) for large containers, pill (999px) for badge shapes. Consistent radii mean the eye builds recognition before reading."
+  - group: "Components"
+    number: "07"
+    title: "Case Study Card"
+    paragraphs:
+      - "The CaseStudyCard is the primary homepage surface. It wraps a link, an image slot, an industry tag, a title, a body summary, a tag list, and a role attribution. The first card in the grid spans full width with a horizontal layout. The rest stack vertically in a two-column grid."
+      - "One interactive state: hover shifts the border color and raises a subtle shadow. The arrow in the corner moves. That's the full interaction model."
+    imageLabel: "CaseStudyCard · default and wide variants"
+  - group: "Components"
+    number: "08"
+    title: "Content Components"
+    paragraphs:
+      - "The Problem Block is the highest-emphasis text block on any case study page. It sits on a surface background with 36px padding, no border, and holds an eyebrow, a large display-font body, an emphasized highlight span, and an optional closing line. It appears once per case."
+      - "Section components follow one pattern: bracketed number in accent blue, title at display-section scale, body at body-lg. Bullet lists use a left-border accent on a light-blue tinted surface. Persona cards split into a name and blurb, then a frustrations grid. Every component does one thing and pulls from the same token set."
+    imageLabel: "Component library · problem block · persona card · section"
+---

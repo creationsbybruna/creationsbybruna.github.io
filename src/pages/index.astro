@@ -4,7 +4,7 @@ import CaseStudyCard from '../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
 const allWork = await getCollection('work');
-const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf'];
+const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf', 'portfolio-design-system'];
 const projects = order.map(id => allWork.find(e => e.data.id === id)!);
 
 const experience = [
