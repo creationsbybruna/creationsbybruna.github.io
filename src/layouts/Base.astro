@@ -41,10 +41,15 @@ const {
     <!-- Theme: set data-theme before paint to avoid FOUC -->
     <script is:inline>
       (function () {
-        const stored = localStorage.getItem('bvg-theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = stored ?? (prefersDark ? 'dark' : 'light');
-        document.documentElement.dataset.theme = theme;
+        const isContact = window.location.pathname === '/contact' || window.location.pathname.startsWith('/contact/');
+        if (isContact) {
+          document.documentElement.dataset.theme = 'light';
+        } else {
+          const stored = localStorage.getItem('bvg-theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          const theme = stored ?? (prefersDark ? 'dark' : 'light');
+          document.documentElement.dataset.theme = theme;
+        }
       })();
     </script>
   </head>
@@ -55,23 +60,5 @@ const {
       <Footer />
     </div>
 
-    <!-- Theme toggle script -->
-    <script>
-      const toggle = document.getElementById('bvg-theme-toggle');
-      const label = document.getElementById('bvg-theme-label');
-
-      function syncLabel() {
-        if (label) label.textContent = document.documentElement.dataset.theme === 'dark' ? 'Light' : 'Dark';
-      }
-
-      syncLabel();
-
-      toggle?.addEventListener('click', () => {
-        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.dataset.theme = next;
-        localStorage.setItem('bvg-theme', next);
-        syncLabel();
-      });
-    </script>
   </body>
 </html>
