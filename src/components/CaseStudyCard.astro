@@ -17,7 +17,7 @@ const { slug, industry, cardTitle, cardBody, tags, role, wide = false } = Astro.
 <a href={`/work/${slug}`} class={`bvg-card${wide ? ' is-wide' : ''}`}>
   <div class="bvg-card-image">
     <ImageSlot label={`${slug} · cover`} />
-    <span class="bvg-card-industry">[{industry}]</span>
+    <span class="bvg-card-industry">{industry}</span>
   </div>
   <div class="bvg-card-body">
     <h3 class="bvg-card-title">{cardTitle}</h3>
