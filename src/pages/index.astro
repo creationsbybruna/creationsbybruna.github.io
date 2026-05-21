@@ -8,15 +8,9 @@ const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf']
 const projects = order.map(id => allWork.find(e => e.data.id === id)!);
 
 const experience = [
-  {
-    company: 'Impact Observatory',
-    role: 'Senior Product Manager & Designer',
-    range: 'Apr 2024 – Present',
-    body: 'Led the build and launch of one of the first geospatial LLM platform prototypes in the industry, directly contributing to multiple company funding opportunities.',
-  },
-  { company: 'Impact Observatory', role: 'UX Designer', range: 'Jan 2021 – Apr 2024', body: '' },
-  { company: 'Trilogy Education', role: 'Assistant UX/UI Instructor', range: 'Aug 2021 – Feb 2022', body: '' },
-  { company: 'National Geographic Society', role: 'UX Designer', range: 'Jun 2018 – Jan 2021', body: '' },
+  { company: 'Impact Observatory', role: 'Senior Product Manager & Designer', range: 'Jan 2021 – Present', current: true },
+  { company: 'Trilogy Education', role: 'Assistant UX/UI Instructor', range: 'Aug 2021 – Feb 2022' },
+  { company: 'National Geographic Society', role: 'UX Designer', range: 'Jun 2018 – Jan 2021' },
 ];
 ---
 
@@ -59,7 +53,7 @@ const experience = [
     </section>
 
     <!-- Case studies -->
-    <section class="bvg-section" aria-label="Selected work">
+    <section class="bvg-section bvg-section--padded" aria-label="Selected work">
       <div class="bvg-section-head">
         <div class="bvg-eyebrow">Selected Work · 2018 – Present</div>
         <h2 class="bvg-section-title">Case Studies</h2>
@@ -81,25 +75,25 @@ const experience = [
     </section>
 
     <!-- Experience -->
-    <section class="bvg-section" aria-label="Experience">
+    <section class="bvg-section bvg-section--surface" aria-label="Experience">
       <div class="bvg-section-head">
         <div class="bvg-eyebrow">Experience</div>
       </div>
-      <div class="bvg-exp-grid">
+      <ul class="bvg-exp-list">
         {experience.map(e => (
-          <div class="bvg-exp-card">
-            <div class="bvg-exp-range">{e.range}</div>
-            <div>
-              <div class="bvg-exp-role">
-                <span class="bvg-exp-company">{e.company}</span>
-                <span aria-hidden="true">·</span>
-                <span class="bvg-exp-title">{e.role}</span>
-              </div>
-              {e.body && <p class="bvg-exp-body">{e.body}</p>}
+          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`}>
+            <div class="bvg-exp-range">
+              {e.range}
+              {e.current && <span class="bvg-exp-current-badge">Current</span>}
             </div>
-          </div>
+            <div class="bvg-exp-role">
+              <span class="bvg-exp-company">{e.company}</span>
+              <span aria-hidden="true">·</span>
+              <span class="bvg-exp-title">{e.role}</span>
+            </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
 
     <!-- About snippet -->
@@ -107,7 +101,7 @@ const experience = [
       <div class="bvg-about-snippet-inner">
         <div class="bvg-eyebrow">About</div>
         <p class="bvg-about-snippet-body">
-          I'm a senior product manager and designer creating effective strategies and clean design solutions — grounded in research and driven by outcomes.
+          Welcome! I'm a senior product manager and designer creating effective strategies and elegant design solutions driven by a data-informed and user-centered problem-solving approach.
         </p>
         <a href="/about" class="bvg-link-arrow">
           More About Me
