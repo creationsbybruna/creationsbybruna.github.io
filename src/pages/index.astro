@@ -4,8 +4,10 @@ import CaseStudyCard from '../components/CaseStudyCard.astro';
 import { getCollection } from 'astro:content';
 
 const allWork = await getCollection('work');
-const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf'];
-const projects = order.map(id => allWork.find(e => e.data.id === id)!);
+const caseStudyOrder = ['gis-llm', 'edu-pages', 'edu-search'];
+const additionalOrder = ['impact-site', 'damo-surf', 'portfolio-design-system'];
+const caseStudies = caseStudyOrder.map(id => allWork.find(e => e.data.id === id)!);
+const additionalProjects = additionalOrder.map(id => allWork.find(e => e.data.id === id)!);
 
 const experience = [
   { company: 'Impact Observatory', role: 'Senior Product Manager & Designer', range: 'Jan 2021 – Present', current: true },
@@ -59,6 +61,8 @@ const experience = [
         <h2 class="bvg-section-title">Case Studies</h2>
       </div>
 
+      <div class="bvg-card-grid">
+        {caseStudies.map((entry, i) => (
       <div class="bvg-card-grid" data-animate-group>
         {projects.map((entry, i) => (
           <CaseStudyCard
@@ -69,6 +73,25 @@ const experience = [
             tags={entry.data.tags}
             role={entry.data.role}
             wide={i === 0}
+            light={i === 0}
+          />
+        ))}
+      </div>
+
+      <div class="bvg-section-head bvg-section-head--sub">
+        <h2 class="bvg-section-title">Additional Projects</h2>
+      </div>
+
+      <div class="bvg-card-grid">
+        {additionalProjects.map((entry) => (
+          <CaseStudyCard
+            slug={entry.slug}
+            industry={entry.data.industry}
+            cardTitle={entry.data.cardTitle}
+            cardBody={entry.data.cardBody}
+            tags={entry.data.tags}
+            role={entry.data.role}
+            wide={false}
             animate={true}
           />
         ))}
