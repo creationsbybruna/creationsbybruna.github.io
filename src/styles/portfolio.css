@@ -506,7 +506,7 @@
   padding: 80px 56px 48px;
   border-top: 1px solid var(--color-border);
   display: flex; flex-direction: column; gap: 64px;
-  background: #F7EDDC;
+  background: #E8D9C3;
   color: #1C0C06;
   border-top-color: #C8A070;
 }
@@ -568,7 +568,7 @@
 @media (max-width: 640px) {
   .bvg-nav-contact { display: none; }
   .bvg-footer { padding: 48px 28px 32px; gap: 32px; }
-  .bvg-footer-email { font-size: 32px; gap: 12px; }
+  .bvg-footer-email { font-size: 22px; gap: 12px; }
   .bvg-footer-row { flex-direction: column; align-items: flex-start; gap: 16px; }
   .bvg-footer-meta { display: none; }
 }
