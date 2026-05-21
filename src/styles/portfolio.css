@@ -578,6 +578,10 @@ html[data-theme="light"] .bvg-footer {
   background: #1A0C07;
   color: #F7EDDC;
   border-top-color: #5A3020;
+  gap: 0;
+}
+html[data-theme="light"] .bvg-footer-cta {
+  display: none;
 }
 html[data-theme="light"] .bvg-footer-eyebrow {
   color: #8A6040;
