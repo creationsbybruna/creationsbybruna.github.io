@@ -48,7 +48,6 @@ const work = defineCollection({
     personas: z.array(persona).optional(),
     useCases: z.array(useCase).optional(),
     sections: z.array(section).optional(),
-    outputImages: z.array(z.string()).optional(),
   }),
 });
 
