@@ -46,8 +46,7 @@ const {
           document.documentElement.dataset.theme = 'light';
         } else {
           const stored = localStorage.getItem('bvg-theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          const theme = stored ?? (prefersDark ? 'dark' : 'light');
+          const theme = stored ?? 'dark';
           document.documentElement.dataset.theme = theme;
         }
       })();
