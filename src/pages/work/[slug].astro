@@ -7,7 +7,6 @@ import Carousel from '../../components/Carousel.astro';
 import PersonaCard from '../../components/PersonaCard.astro';
 import ProblemBlock from '../../components/ProblemBlock.astro';
 import PasswordGate from '../../components/PasswordGate.astro';
-
 export async function getStaticPaths() {
   const entries = await getCollection('work');
   return entries.map(entry => ({ params: { slug: entry.slug }, props: { entry } }));
@@ -37,7 +36,7 @@ if (d.sections) {
   ogTitle={d.cardTitle}
 >
   <PasswordGate />
-  <main id="pw-content" class="bvg-page" hidden>
+  <main id="pw-content" class="bvg-page">
 
     <!-- Header -->
     <div class="bvg-page-header-cs">
