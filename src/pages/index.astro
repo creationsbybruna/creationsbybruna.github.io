@@ -21,7 +21,7 @@ const experience = [
 
     <!-- Hero -->
     <section class="bvg-hero" aria-label="Introduction">
-      <div class="bvg-hero-greeting">
+      <div class="bvg-hero-greeting" data-animate>
         <span class="bvg-wave" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M3 12c2.5 0 2.5-3 5-3s2.5 3 5 3 2.5-3 5-3 2.5 3 5 3"/>
@@ -34,15 +34,15 @@ const experience = [
         </span>
       </div>
 
-      <h1 class="bvg-hero-title">
+      <h1 class="bvg-hero-title" data-animate style="animation-delay: 80ms">
         Leveraging AI to build scalable products that people <em>actually</em> need and want to use.
       </h1>
 
-      <p class="bvg-hero-sub">
+      <p class="bvg-hero-sub" data-animate style="animation-delay: 160ms">
         I bring a researcher's instinct for root-cause thinking, a designer's eye for user-centered solutions, and a strategist's ability to connect product decisions to outcomes.
       </p>
 
-      <div class="bvg-hero-ctas">
+      <div class="bvg-hero-ctas" data-animate style="animation-delay: 220ms">
         <a href="/contact" class="bvg-btn-primary">
           Let's Connect
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -56,13 +56,15 @@ const experience = [
 
     <!-- Case studies -->
     <section class="bvg-section bvg-section--padded" aria-label="Selected work">
-      <div class="bvg-section-head">
+      <div class="bvg-section-head" data-animate>
         <div class="bvg-eyebrow">Selected Work · 2018 – Present</div>
         <h2 class="bvg-section-title">Case Studies</h2>
       </div>
 
       <div class="bvg-card-grid">
         {caseStudies.map((entry, i) => (
+      <div class="bvg-card-grid" data-animate-group>
+        {projects.map((entry, i) => (
           <CaseStudyCard
             slug={entry.slug}
             industry={entry.data.industry}
@@ -90,6 +92,7 @@ const experience = [
             tags={entry.data.tags}
             role={entry.data.role}
             wide={false}
+            animate={true}
           />
         ))}
       </div>
@@ -97,12 +100,12 @@ const experience = [
 
     <!-- Experience -->
     <section class="bvg-section bvg-section--surface" aria-label="Experience">
-      <div class="bvg-section-head">
+      <div class="bvg-section-head" data-animate>
         <div class="bvg-eyebrow">Experience</div>
       </div>
-      <ul class="bvg-exp-list">
+      <ul class="bvg-exp-list" data-animate-group>
         {experience.map(e => (
-          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`}>
+          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`} data-animate>
             <div class="bvg-exp-range">
               {e.range}
               {e.current && <span class="bvg-exp-current-badge">Current</span>}
@@ -119,7 +122,7 @@ const experience = [
 
     <!-- About snippet -->
     <section class="bvg-about-snippet" aria-label="About">
-      <div class="bvg-about-snippet-inner">
+      <div class="bvg-about-snippet-inner" data-animate>
         <div class="bvg-eyebrow">About</div>
         <p class="bvg-about-snippet-body">
           Welcome! I'm a senior product manager and designer creating effective strategies and elegant design solutions driven by a data-informed and user-centered problem-solving approach.

@@ -3,11 +3,12 @@ interface Props {
   name: string;
   blurb: string;
   frustrations: [string, string][];
+  animate?: boolean;
 }
-const { name, blurb, frustrations } = Astro.props;
+const { name, blurb, frustrations, animate = false } = Astro.props;
 ---
 
-<div class="bvg-persona">
+<div class="bvg-persona" {...animate ? { 'data-animate': '' } : {}}>
   <div class="bvg-persona-head">
     <div class="bvg-eyebrow">Persona</div>
     <h4 class="bvg-persona-name">{name}</h4>
