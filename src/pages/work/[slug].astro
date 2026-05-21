@@ -5,6 +5,7 @@ import EyebrowTag from '../../components/EyebrowTag.astro';
 import ImageSlot from '../../components/ImageSlot.astro';
 import PersonaCard from '../../components/PersonaCard.astro';
 import ProblemBlock from '../../components/ProblemBlock.astro';
+import PasswordGate from '../../components/PasswordGate.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('work');
@@ -34,7 +35,8 @@ if (d.sections) {
   description={d.cardBody}
   ogTitle={d.cardTitle}
 >
-  <main class="bvg-page">
+  <PasswordGate />
+  <main id="pw-content" class="bvg-page" hidden>
 
     <!-- Header -->
     <div class="bvg-page-header-cs">
