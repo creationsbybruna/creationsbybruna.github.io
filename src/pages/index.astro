@@ -6,6 +6,12 @@ import { getCollection } from 'astro:content';
 const allWork = await getCollection('work');
 const order = ['gis-llm', 'edu-pages', 'edu-search', 'impact-site', 'damo-surf'];
 const projects = order.map(id => allWork.find(e => e.data.id === id)!);
+
+const experience = [
+  { company: 'Impact Observatory', role: 'Senior Product Manager & Designer', range: 'Jan 2021 – Present', current: true },
+  { company: 'Trilogy Education', role: 'Assistant UX/UI Instructor', range: 'Aug 2021 – Feb 2022' },
+  { company: 'National Geographic Society', role: 'UX Designer', range: 'Jun 2018 – Jan 2021' },
+];
 ---
 
 <Base title="Bruna Viza Gomes | Senior Product Manager & Designer">
@@ -47,7 +53,7 @@ const projects = order.map(id => allWork.find(e => e.data.id === id)!);
     </section>
 
     <!-- Case studies -->
-    <section class="bvg-section" aria-label="Selected work">
+    <section class="bvg-section bvg-section--padded" aria-label="Selected work">
       <div class="bvg-section-head">
         <div class="bvg-eyebrow">Selected Work · 2018 – Present</div>
         <h2 class="bvg-section-title">Case Studies</h2>
@@ -66,6 +72,28 @@ const projects = order.map(id => allWork.find(e => e.data.id === id)!);
           />
         ))}
       </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="bvg-section bvg-section--surface" aria-label="Experience">
+      <div class="bvg-section-head">
+        <div class="bvg-eyebrow">Experience</div>
+      </div>
+      <ul class="bvg-exp-list">
+        {experience.map(e => (
+          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`}>
+            <div class="bvg-exp-range">
+              {e.range}
+              {e.current && <span class="bvg-exp-current-badge">Current</span>}
+            </div>
+            <div class="bvg-exp-role">
+              <span class="bvg-exp-company">{e.company}</span>
+              <span aria-hidden="true">·</span>
+              <span class="bvg-exp-title">{e.role}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
     </section>
 
     <!-- About snippet -->
