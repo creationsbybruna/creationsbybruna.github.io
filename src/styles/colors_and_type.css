@@ -113,7 +113,7 @@
 /* ============================================================
    Semantic element styles
    ============================================================ */
-html { color-scheme: light dark; }
+html { color-scheme: dark; }
 body {
   margin: 0;
   background: var(--color-bg);

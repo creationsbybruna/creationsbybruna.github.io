@@ -10,17 +10,12 @@ interface Props {
   role: string;
   wide?: boolean;
   light?: boolean;
-  animate?: boolean;
 }
 
-const { slug, industry, cardTitle, cardBody, tags, role, wide = false, light = false, animate = false } = Astro.props;
+const { slug, industry, cardTitle, cardBody, tags, role, wide = false, light = false } = Astro.props;
 ---
 
-<a
-  href={`/work/${slug}`}
-  class={`bvg-card${wide ? ' is-wide' : ''}${light ? ' is-light' : ''}`}
-  {...animate ? { 'data-animate': '' } : {}}
->
+<a href={`/work/${slug}`} class={`bvg-card${wide ? ' is-wide' : ''}${light ? ' is-light' : ''}`}>
   <div class="bvg-card-image">
     <ImageSlot label={`${slug} · cover`} />
     <span class="bvg-card-industry">{industry}</span>

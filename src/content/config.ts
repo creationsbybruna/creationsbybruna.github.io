@@ -11,6 +11,7 @@ const section = z.object({
   paragraphs: z.array(z.string()).optional(),
   bullets: z.array(bullet).optional(),
   imageLabel: z.string().optional(),
+  processImages: z.array(z.string()).optional(),
 });
 
 const persona = z.object({
@@ -31,7 +32,7 @@ const work = defineCollection({
     id: z.string(),
     case: z.string(),
     label: z.string(),
-    industry: z.enum(['GIS', 'Education', 'Tourism']),
+    industry: z.enum(['GIS', 'Education', 'Tourism', 'Design Systems']),
     cardTitle: z.string(),
     cardBody: z.string(),
     tags: z.array(z.string()),

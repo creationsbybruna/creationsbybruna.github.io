@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import EyebrowTag from '../../components/EyebrowTag.astro';
 import ImageSlot from '../../components/ImageSlot.astro';
+import Carousel from '../../components/Carousel.astro';
 import PersonaCard from '../../components/PersonaCard.astro';
 import ProblemBlock from '../../components/ProblemBlock.astro';
 import PasswordGate from '../../components/PasswordGate.astro';
@@ -171,6 +172,11 @@ if (d.sections) {
                   {s.imageLabel && (
                     <div class="bvg-numbered-image">
                       <ImageSlot label={s.imageLabel} />
+                    </div>
+                  )}
+                  {s.processImages && s.processImages.length > 0 && (
+                    <div class="bvg-numbered-carousel">
+                      <Carousel images={s.processImages} id={`carousel-${entry.slug}-${s.number}`} />
                     </div>
                   )}
                 </div>
