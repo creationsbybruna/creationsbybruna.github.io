@@ -7,12 +7,33 @@ const isContact = path === '/contact' || path === '/contact/';
 
 <header class="bvg-topbar">
   <a class="bvg-wordmark" href="/">Bruna Viza Gomes</a>
-  <nav class="bvg-nav" aria-label="Primary">
+  <button class="bvg-menu-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
+    <span class="bvg-hamburger"></span>
+  </button>
+  <nav class="bvg-nav" id="mobile-nav" aria-label="Primary">
     <a class={`bvg-nav-item${isWork ? ' is-active' : ''}`} href="/">Work</a>
     <a class={`bvg-nav-item${isAbout ? ' is-active' : ''}`} href="/about">About</a>
-    <a class={`bvg-nav-item bvg-nav-contact${isContact ? ' is-active' : ''}`} href="/contact">Contact</a>
-    <button class="bvg-theme-toggle" id="bvg-theme-toggle" aria-label="Toggle colour theme">
-      <span id="bvg-theme-label">Dark</span>
-    </button>
+    <a class={`bvg-nav-item${isContact ? ' is-active' : ''}`} href="/contact">Contact</a>
   </nav>
 </header>
+
+<script>
+  const toggle = document.querySelector('.bvg-menu-toggle') as HTMLButtonElement;
+  const nav = document.querySelector('.bvg-nav') as HTMLElement;
+
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!expanded));
+      nav.classList.toggle('is-open');
+    });
+
+    // Close menu when a link is clicked
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        toggle.setAttribute('aria-expanded', 'false');
+        nav.classList.remove('is-open');
+      });
+    });
+  }
+</script>

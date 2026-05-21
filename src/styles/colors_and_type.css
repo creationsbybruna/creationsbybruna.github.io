@@ -103,6 +103,13 @@
   --color-tag-border-light:   rgba(237,216,122,0.1882);
 }
 
+/* -------------- LIGHT THEME (contact page only) -------------- */
+:root[data-theme="light"] {
+  --color-bg:                 #E8D9C3;
+  --color-surface:            #DFC9B0;
+  --color-surface-elevated:   #D4BA9D;
+}
+
 /* ============================================================
    Semantic element styles
    ============================================================ */

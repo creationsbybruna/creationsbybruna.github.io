@@ -21,6 +21,54 @@
   color: var(--color-text-primary); text-decoration: none;
   white-space: nowrap;
 }
+.bvg-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  align-items: center;
+  justify-content: center;
+}
+.bvg-hamburger {
+  position: relative;
+  width: 24px;
+  height: 16px;
+  display: inline-block;
+}
+.bvg-hamburger::before,
+.bvg-hamburger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text-primary);
+  border-radius: 1px;
+  transition: all .3s ease-out;
+}
+.bvg-hamburger::before {
+  top: 0;
+}
+.bvg-hamburger::after {
+  bottom: 0;
+}
+.bvg-hamburger {
+  background: linear-gradient(to bottom, transparent 7px, var(--color-text-primary) 7px, var(--color-text-primary) 9px, transparent 9px);
+  background-size: 100% 100%;
+  transition: all .3s ease-out;
+}
+.bvg-menu-toggle[aria-expanded="true"] .bvg-hamburger::before {
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+}
+.bvg-menu-toggle[aria-expanded="true"] .bvg-hamburger {
+  background: none;
+}
+.bvg-menu-toggle[aria-expanded="true"] .bvg-hamburger::after {
+  bottom: 50%;
+  transform: translateY(50%) rotate(-45deg);
+}
 .bvg-nav { display: flex; align-items: center; gap: 28px; }
 .bvg-nav-item {
   font-family: var(--font-sans); font-weight: 500; font-size: 12px;
@@ -35,20 +83,6 @@
   border-bottom-color: var(--color-accent-primary);
   font-weight: 700;
 }
-.bvg-nav-contact {
-  color: var(--color-text-secondary);
-}
-.bvg-theme-toggle {
-  font-family: var(--font-sans); font-weight: 700; font-size: 10px;
-  letter-spacing: 0.160em; text-transform: uppercase;
-  color: var(--color-text-secondary);
-  background: transparent;
-  border: 1px solid var(--color-border); border-radius: 999px;
-  padding: 6px 12px; cursor: pointer;
-  transition: background-color .15s ease-out, color .15s ease-out;
-}
-.bvg-theme-toggle:hover { background: rgba(200,160,112,0.12); color: var(--color-text-primary); }
-
 /* -------------------- Page chrome -------------------- */
 .bvg-page { max-width: 1280px; margin: 0 auto; padding: 24px 56px 80px; }
 .bvg-page-header { padding: 64px 0 32px; max-width: 880px; }
@@ -525,33 +559,38 @@
   padding: 80px 56px 48px;
   border-top: 1px solid var(--color-border);
   display: flex; flex-direction: column; gap: 64px;
+  background: #E8D9C3;
+  color: #1C0C06;
+  border-top-color: #C8A070;
 }
 .bvg-footer-cta {
   display: flex; flex-direction: column; gap: 16px;
 }
 .bvg-footer-eyebrow {
   font-family: var(--font-display); font-style: italic;
-  font-size: 22px; color: var(--color-text-secondary);
+  font-size: 22px; color: #8A6040;
   margin: 0;
 }
 .bvg-footer-email {
   font-family: var(--font-display); font-size: 60px; line-height: 1.05;
-  letter-spacing: -0.030em; color: var(--color-text-primary);
+  letter-spacing: -0.030em; color: #1C0C06;
   text-decoration: none;
   display: inline-flex; align-items: center; gap: 18px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #C8A070;
   padding-bottom: 18px;
   align-self: flex-start;
   transition: color .15s ease-out;
+  flex-wrap: wrap;
 }
-.bvg-footer-email:hover { color: var(--color-accent-primary); }
+.bvg-footer-email:hover { color: #4A5CFA; }
+.bvg-footer-email svg { flex-shrink: 0; }
 
 .bvg-footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-.bvg-footer-mark { font-family: var(--font-display); font-size: 20px; letter-spacing: -0.020em; }
-.bvg-footer-meta { font-size: 11px; color: var(--color-text-secondary); }
-.bvg-footer-links { display: flex; gap: 12px; font-size: 12px; color: var(--color-text-secondary); }
-.bvg-footer-links a { color: var(--color-text-primary); text-decoration: none; }
-.bvg-footer-links a:hover { color: var(--color-accent-primary); text-decoration: underline; text-underline-offset: 3px; }
+.bvg-footer-mark { font-family: var(--font-display); font-size: 20px; letter-spacing: -0.020em; color: #1C0C06; }
+.bvg-footer-meta { font-size: 11px; color: #8A6040; }
+.bvg-footer-links { display: flex; gap: 12px; font-size: 12px; color: #8A6040; }
+.bvg-footer-links a { color: #1C0C06; text-decoration: none; }
+.bvg-footer-links a:hover { color: #4A5CFA; text-decoration: underline; text-underline-offset: 3px; }
 
 /* -------------------- Responsive -------------------- */
 @media (max-width: 980px) {
@@ -581,7 +620,72 @@
 }
 
 @media (max-width: 640px) {
-  .bvg-nav-contact, .bvg-theme-toggle { display: none; }
+  .bvg-menu-toggle { display: flex; }
+  .bvg-nav {
+    position: absolute;
+    top: 72px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    padding: 16px 28px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease-out;
+  }
+  .bvg-nav.is-open {
+    max-height: 200px;
+  }
+  .bvg-nav-item {
+    padding: 12px 0;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .bvg-nav-item.is-active {
+    border-bottom: none;
+  }
+  .bvg-footer { padding: 48px 28px 32px; gap: 32px; }
+  .bvg-footer-email { font-size: 22px; gap: 12px; }
+  .bvg-footer-row { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .bvg-footer-meta { display: none; }
+}
+
+/* -------------------- Contact page footer (dark theme) -------------------- */
+html[data-theme="light"] .bvg-footer {
+  background: #1A0C07;
+  color: #F7EDDC;
+  border-top-color: #5A3020;
+  gap: 0;
+}
+html[data-theme="light"] .bvg-footer-cta {
+  display: none;
+}
+html[data-theme="light"] .bvg-footer-eyebrow {
+  color: #8A6040;
+}
+html[data-theme="light"] .bvg-footer-email {
+  color: #F7EDDC;
+  border-bottom-color: #5A3020;
+}
+html[data-theme="light"] .bvg-footer-email:hover {
+  color: #A8C4E8;
+}
+html[data-theme="light"] .bvg-footer-mark {
+  color: #F7EDDC;
+}
+html[data-theme="light"] .bvg-footer-meta {
+  color: #3A1E0E;
+}
+html[data-theme="light"] .bvg-footer-links {
+  color: #8A6040;
+}
+html[data-theme="light"] .bvg-footer-links a {
+  color: #F7EDDC;
+}
+html[data-theme="light"] .bvg-footer-links a:hover {
+  color: #A8C4E8;
 }
 
 /* -------------------- Reduced motion -------------------- */
