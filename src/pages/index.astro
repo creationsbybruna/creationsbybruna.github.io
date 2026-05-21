@@ -61,10 +61,8 @@ const experience = [
         <h2 class="bvg-section-title">Case Studies</h2>
       </div>
 
-      <div class="bvg-card-grid">
-        {caseStudies.map((entry, i) => (
       <div class="bvg-card-grid" data-animate-group>
-        {projects.map((entry, i) => (
+        {caseStudies.map((entry, i) => (
           <CaseStudyCard
             slug={entry.slug}
             industry={entry.data.industry}
