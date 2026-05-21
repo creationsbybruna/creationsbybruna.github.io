@@ -68,7 +68,7 @@ const experience = [
     <!-- Bio -->
     <section aria-label="Bio">
       <div class="bvg-about">
-        <div class="bvg-about-portrait">
+        <div class="bvg-about-portrait" data-animate="fade">
           <img
             src="https://framerusercontent.com/images/MO0hVIQNai0NYfIXIHhUVKds.jpg?scale-down-to=1024&width=2504&height=3338"
             alt="Portrait of Bruna Gomes"
@@ -76,17 +76,17 @@ const experience = [
           />
         </div>
         <div class="bvg-about-body">
-          <div class="bvg-eyebrow">About</div>
-          <h1 class="bvg-h1-about">Oi! I'm Bruna Gomes, senior product manager and designer based on the US East Coast.</h1>
-          <p class="bvg-about-tagline">Previously National Geographic Society; now Impact Observatory.</p>
+          <div class="bvg-eyebrow" data-animate>About</div>
+          <h1 class="bvg-h1-about" data-animate style="animation-delay: 60ms">Oi! I'm Bruna Gomes, senior product manager and designer based on the US East Coast.</h1>
+          <p class="bvg-about-tagline" data-animate style="animation-delay: 120ms">Previously National Geographic Society; now Impact Observatory.</p>
 
-          <p class="bvg-body-lg">
+          <p class="bvg-body-lg" data-animate style="animation-delay: 180ms">
             I started my journey at American University, where I studied computer science and graphic design. After finding a way to bridge the two studies, I joined <strong>National Geographic Society</strong> and spent 3 years working and refining my skills as a UX designer.
           </p>
-          <p class="bvg-body-lg">
+          <p class="bvg-body-lg" data-animate style="animation-delay: 240ms">
             I then joined and have continued to work the past 5 years at <strong>Impact Observatory</strong> (IO) as a senior product member. I initially joined IO as a product designer, and have since been expanding my knowledge to also encompass product management. My typical work day ranges from driving company alignment and product direction, leading user research and interface design efforts, and applying my computer science background to the front-end development of our company website.
           </p>
-          <p class="bvg-body-lg">
+          <p class="bvg-body-lg" data-animate style="animation-delay: 300ms">
             When I'm not working, you'll find me surfing, shaping surfboards, creating new ceramics, or checking out new cafes.
           </p>
         </div>
@@ -95,13 +95,13 @@ const experience = [
 
     <!-- Specialties -->
     <section class="bvg-section" aria-label="Specialties">
-      <div class="bvg-section-head">
+      <div class="bvg-section-head" data-animate>
         <div class="bvg-eyebrow">How I Work</div>
         <h2 class="bvg-section-title">What I Specialize In</h2>
       </div>
-      <div class="bvg-spec-grid">
+      <div class="bvg-spec-grid" data-animate-group>
         {specialties.map(s => (
-          <div class="bvg-spec-card">
+          <div class="bvg-spec-card" data-animate>
             <div class="bvg-spec-num">{s.num}</div>
             <h3 class="bvg-spec-title">{s.title}</h3>
             <p class="bvg-spec-body">{s.body}</p>
@@ -112,13 +112,13 @@ const experience = [
 
     <!-- Experience -->
     <section class="bvg-section bvg-section--surface" aria-label="Experience">
-      <div class="bvg-section-head">
+      <div class="bvg-section-head" data-animate>
         <div class="bvg-eyebrow">Experience</div>
         <h2 class="bvg-section-title">Where I've Worked</h2>
       </div>
-      <ul class="bvg-exp-list">
+      <ul class="bvg-exp-list" data-animate-group>
         {experience.map(e => (
-          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`}>
+          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`} data-animate>
             <div class="bvg-exp-range">
               {e.range}
               {e.current && <span class="bvg-exp-current-badge">Current</span>}
@@ -141,7 +141,7 @@ const experience = [
     </section>
 
     <!-- CTA -->
-    <section class="bvg-about-cta" aria-label="Contact CTA">
+    <section class="bvg-about-cta" aria-label="Contact CTA" data-animate>
       <h2 class="bvg-cta-title">Working on something interesting?</h2>
       <p class="bvg-cta-body">
         Open to senior PM and design roles, product discovery engagements, and consulting. If the work sounds good, let's talk.

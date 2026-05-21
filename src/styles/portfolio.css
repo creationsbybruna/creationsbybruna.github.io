@@ -349,7 +349,7 @@
 /* -------------------- Case Study -------------------- */
 .bvg-page-header-cs { padding: 48px 0 24px; max-width: 980px; }
 .bvg-back {
-  display: inline-flex; align-items: center; gap: 8px;
+  display: flex; align-items: center; gap: 8px;
   font-family: var(--font-sans); font-weight: 700; font-size: 10px;
   letter-spacing: 0.160em; text-transform: uppercase;
   color: var(--color-text-secondary); text-decoration: none;
@@ -369,7 +369,6 @@
   font-size: 10px;
 }
 .bvg-cs-label-text { font-style: italic; }
-.bvg-cs-industry-row { margin-bottom: 20px; }
 .bvg-cs-title { font-family: var(--font-display); font-size: 56px; line-height: 1.04; letter-spacing: -0.030em; margin: 0 0 32px; max-width: 22ch; color: var(--color-text-primary); }
 
 .bvg-meta-row { display: flex; flex-wrap: wrap; gap: 0; border-top: 1px solid var(--color-border); padding-top: 22px; margin-top: 8px; }
@@ -710,7 +709,39 @@ html[data-theme="light"] .bvg-footer-links a:hover {
   color: #A8C4E8;
 }
 
+/* -------------------- Scroll animations -------------------- */
+@keyframes bvg-fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes bvg-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+[data-animate] {
+  opacity: 0;
+}
+[data-animate].is-visible {
+  animation: bvg-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+[data-animate="fade"].is-visible {
+  animation: bvg-fade-in 0.55s ease-out forwards;
+}
+
+/* Stagger siblings when parent has data-animate-group */
+[data-animate-group] > [data-animate]:nth-child(1) { animation-delay: 0ms; }
+[data-animate-group] > [data-animate]:nth-child(2) { animation-delay: 60ms; }
+[data-animate-group] > [data-animate]:nth-child(3) { animation-delay: 120ms; }
+[data-animate-group] > [data-animate]:nth-child(4) { animation-delay: 180ms; }
+[data-animate-group] > [data-animate]:nth-child(5) { animation-delay: 240ms; }
+[data-animate-group] > [data-animate]:nth-child(6) { animation-delay: 300ms; }
+
 /* -------------------- Reduced motion -------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 0.01ms !important; }
+  [data-animate], [data-animate].is-visible {
+    opacity: 1;
+    animation: none;
+  }
 }

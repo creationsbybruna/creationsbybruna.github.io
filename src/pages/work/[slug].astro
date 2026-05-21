@@ -40,7 +40,7 @@ if (d.sections) {
 
     <!-- Header -->
     <div class="bvg-page-header-cs">
-      <a href="/" class="bvg-back">
+      <a href="/" class="bvg-back" data-animate>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <line x1="19" y1="12" x2="5" y2="12"/>
           <polyline points="11,18 5,12 11,6"/>
@@ -48,19 +48,15 @@ if (d.sections) {
         Back to Work
       </a>
 
-      <div class="bvg-cs-label">
+      <div class="bvg-cs-label" data-animate style="animation-delay: 60ms">
         <span class="bvg-cs-case">{d.case}</span>
         <span aria-hidden="true">·</span>
         <span class="bvg-cs-label-text">{d.label}</span>
       </div>
 
-      <div class="bvg-cs-industry-row">
-        <EyebrowTag industry={d.industry} />
-      </div>
+      <h1 class="bvg-cs-title" data-animate style="animation-delay: 120ms">{d.cardTitle}</h1>
 
-      <h1 class="bvg-cs-title">{d.cardTitle}</h1>
-
-      <div class="bvg-meta-row">
+      <div class="bvg-meta-row" data-animate style="animation-delay: 200ms">
         <div class="bvg-meta-item">
           <span class="bvg-meta-lbl">Industry</span>
           <span class="bvg-meta-val">{d.industry}</span>
@@ -81,7 +77,7 @@ if (d.sections) {
     </div>
 
     <!-- Cover image -->
-    <div class="bvg-cs-cover-image">
+    <div class="bvg-cs-cover-image" data-animate="fade">
       <ImageSlot label={`${entry.slug} · cover · 16:9`} />
     </div>
 
@@ -90,7 +86,7 @@ if (d.sections) {
         <!-- Overview -->
         {d.overview && (
           <section class="bvg-section" aria-label="Project overview">
-            <div class="bvg-cs-overview-grid">
+            <div class="bvg-cs-overview-grid" data-animate>
               <div class="bvg-eyebrow">Project Overview</div>
               <div class="bvg-cs-overview-body">
                 {d.overview.map((para, i) => (
@@ -103,7 +99,7 @@ if (d.sections) {
 
         <!-- Problem statement -->
         {d.problem && (
-          <div class="bvg-cs-problem-section">
+          <div class="bvg-cs-problem-section" data-animate>
             <ProblemBlock
               body={d.problem.body}
               emphasis={d.problem.emphasis}
@@ -115,13 +111,13 @@ if (d.sections) {
         <!-- Personas -->
         {d.personas && d.personas.length > 0 && (
           <section class="bvg-section" aria-label="Target personas">
-            <div class="bvg-section-head">
+            <div class="bvg-section-head" data-animate>
               <div class="bvg-eyebrow">Who I Designed For</div>
               <h2 class="bvg-section-title">Target Personas &amp; Their Key Frustrations</h2>
             </div>
-            <div class={`bvg-persona-grid${d.personas.length === 1 ? ' is-one' : ''}`}>
+            <div class={`bvg-persona-grid${d.personas.length === 1 ? ' is-one' : ''}`} data-animate-group>
               {d.personas.map(p => (
-                <PersonaCard name={p.name} blurb={p.blurb} frustrations={p.frustrations} />
+                <PersonaCard name={p.name} blurb={p.blurb} frustrations={p.frustrations} animate={true} />
               ))}
             </div>
           </section>
@@ -130,13 +126,13 @@ if (d.sections) {
         <!-- Use cases -->
         {d.useCases && d.useCases.length > 0 && (
           <section class="bvg-section" aria-label="Target use cases">
-            <div class="bvg-section-head">
+            <div class="bvg-section-head" data-animate>
               <div class="bvg-eyebrow">Where This Shows Up</div>
               <h2 class="bvg-section-title">Target Use Cases</h2>
             </div>
-            <div class="bvg-usecase-list">
+            <div class="bvg-usecase-list" data-animate-group>
               {d.useCases.map(([label, body]) => (
-                <div class="bvg-usecase">
+                <div class="bvg-usecase" data-animate>
                   <div class="bvg-usecase-label">{label}</div>
                   <div class="bvg-usecase-body">{body}</div>
                 </div>
@@ -148,13 +144,13 @@ if (d.sections) {
         <!-- Numbered sections grouped by phase -->
         {phaseGroups.map((phase, pi) => (
           <section class="bvg-phase-group" aria-label={phase.group}>
-            <div class="bvg-phase-head">
+            <div class="bvg-phase-head" data-animate>
               <div class="bvg-eyebrow">Phase {String(pi + 1).padStart(2, '0')}</div>
               <h2 class="bvg-phase-title">{phase.group}</h2>
             </div>
             <div class="bvg-numbered-list">
               {phase.sections.map(s => (
-                <div class="bvg-numbered">
+                <div class="bvg-numbered" data-animate>
                   <div class="bvg-numbered-head">
                     <span class="bvg-numbered-num">[{s.number}]</span>
                   </div>
@@ -196,7 +192,7 @@ if (d.sections) {
 
     <!-- Next case study -->
     {d.nextCaseSlug && d.nextCaseTitle && (
-      <div class="bvg-cs-next">
+      <div class="bvg-cs-next" data-animate>
         <div class="bvg-eyebrow">Next Case Study</div>
         <a href={`/work/${d.nextCaseSlug}`} class="bvg-next-link">
           <div>
