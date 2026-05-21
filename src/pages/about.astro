@@ -30,10 +30,32 @@ const experience = [
     company: 'Impact Observatory',
     role: 'Senior Product Manager & Designer',
     range: 'Jan 2021 – Present',
-    body: 'Led the build and launch of one of the first geospatial LLM platform prototypes in the industry. The work opened up multiple funding opportunities for the company.',
+    current: true,
+    bullets: [
+      'Led the 0 → 1 launch of one of the first geospatial LLM platform prototypes available in the geospatial analysis field, directly contributing to multiple company funding opportunities.',
+      'Wrote system prompts, built agentic workflows, developed QA test pairs, and designed the full design system and end-to-end UX/UI for the same product.',
+      'Conducted user and market studies to establish target user groups, define a go-to-market plan, and structure B2B contract opportunities as well as a tiered membership model.',
+    ],
   },
-  { company: 'Trilogy Education', role: 'Assistant UX/UI Instructor', range: 'Aug 2021 – Feb 2022', body: '' },
-  { company: 'National Geographic Society', role: 'UX Designer', range: 'Jun 2018 – Jan 2021', body: '' },
+  {
+    company: 'Trilogy Education',
+    role: 'Assistant UX/UI Instructor',
+    range: 'Aug 2021 – Feb 2022',
+    bullets: [
+      'Mentored students in the UX field by establishing an environment where students felt comfortable freely participating and receiving constructive feedback.',
+      'Provided career-centered guidance to help students translate classroom learning into industry-ready skills, building their confidence to make a positive impact from day one.',
+    ],
+  },
+  {
+    company: 'National Geographic Society',
+    role: 'UX Designer',
+    range: 'Jun 2018 – Jan 2021',
+    bullets: [
+      'Led the redesign of the resource library search, home pages, and individual asset pages by integrating user research insights, resulting in enhanced user experience and engagement. Recognized with a Webby Award.',
+      'Conducted comprehensive user research and developed innovative design solutions for conservation-driven platforms.',
+      'Designed global features (site-wide navigation and profile platform), facilitating seamless communication across all National Geographic Society platforms and improving user interaction and information accessibility.',
+    ],
+  },
 ];
 ---
 
@@ -84,22 +106,29 @@ const experience = [
     </section>
 
     <!-- Experience -->
-    <section class="bvg-section" aria-label="Experience">
+    <section class="bvg-section bvg-section--surface" aria-label="Experience">
       <div class="bvg-section-head">
         <div class="bvg-eyebrow">Experience</div>
         <h2 class="bvg-section-title">Where I've Worked</h2>
       </div>
       <ul class="bvg-exp-list">
         {experience.map(e => (
-          <li class="bvg-exp-row">
-            <div class="bvg-exp-range">{e.range}</div>
+          <li class={`bvg-exp-row${e.current ? ' is-current' : ''}`}>
+            <div class="bvg-exp-range">
+              {e.range}
+              {e.current && <span class="bvg-exp-current-badge">Current</span>}
+            </div>
             <div>
               <div class="bvg-exp-role">
                 <span class="bvg-exp-company">{e.company}</span>
                 <span aria-hidden="true">·</span>
                 <span class="bvg-exp-title">{e.role}</span>
               </div>
-              {e.body && <p class="bvg-exp-body">{e.body}</p>}
+              {e.bullets && e.bullets.length > 0 && (
+                <ul class="bvg-exp-bullets">
+                  {e.bullets.map(b => <li>{b}</li>)}
+                </ul>
+              )}
             </div>
           </li>
         ))}
