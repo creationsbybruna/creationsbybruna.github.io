@@ -188,21 +188,6 @@ if (d.sections) {
             </div>
           </section>
         ))}
-        {d.outputImages && d.outputImages.length > 0 && (
-          <section class="bvg-section" aria-label="Final output">
-            <div class="bvg-section-head">
-              <div class="bvg-eyebrow">Final Output</div>
-              <h2 class="bvg-section-title">Design Output</h2>
-            </div>
-            <div class="bvg-output-grid">
-              {d.outputImages.map((label) => (
-                <div class="bvg-output-image">
-                  <ImageSlot label={label} />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
       </>
     ) : (
       <!-- Stub -->
