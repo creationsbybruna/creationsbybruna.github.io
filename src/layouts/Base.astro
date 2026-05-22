@@ -20,6 +20,7 @@ const {
   description = 'Portfolio of Bruna Viza Gomes, Senior Product Manager & Designer.',
   ogTitle,
 } = Astro.props;
+
 ---
 
 <!doctype html>
@@ -41,14 +42,8 @@ const {
     <!-- Theme: set data-theme before paint to avoid FOUC -->
     <script is:inline>
       (function () {
-        const isContact = window.location.pathname === '/contact' || window.location.pathname.startsWith('/contact/');
-        if (isContact) {
-          document.documentElement.dataset.theme = 'light';
-        } else {
-          const stored = localStorage.getItem('bvg-theme');
-          const theme = stored ?? 'dark';
-          document.documentElement.dataset.theme = theme;
-        }
+        const theme = localStorage.getItem('bvg-theme') ?? 'dark';
+        document.documentElement.dataset.theme = theme;
       })();
     </script>
   </head>
