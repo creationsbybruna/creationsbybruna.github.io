@@ -300,7 +300,8 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
   border-bottom: 1px solid var(--color-border);
 }
 .bvg-card-industry {
-  position: absolute; top: 14px; left: 14px;
+  display: inline-block;
+  align-self: flex-start;
   font-family: var(--font-sans); font-weight: 700; font-size: 9px;
   letter-spacing: 0.160em; text-transform: uppercase;
   color: var(--color-text-primary);
@@ -653,8 +654,21 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
 
 /* -------------------- Process carousel -------------------- */
 .bvg-numbered-carousel { margin-top: 24px; max-width: 880px; }
-.bvg-carousel-inner { display: flex; align-items: flex-start; gap: 12px; }
-.bvg-carousel-viewport { flex: 1; border-radius: 14px; border: 1px solid var(--color-border); overflow: hidden; }
+
+/*
+  Mobile-first (default): flex-wrap puts viewport on its own row,
+  then prev / dots / next wrap onto the row below as [← dots →].
+  Desktop overrides to grid for side-arrow layout.
+*/
+.bvg-carousel { display: flex; flex-direction: column; gap: 16px; }
+.bvg-carousel-viewport {
+  border-radius: 14px; border: 1px solid var(--color-border); overflow: hidden;
+}
+.bvg-carousel-controls {
+  display: flex; align-items: center; gap: 4px;
+}
+.bvg-carousel-dots { flex: 1; display: flex; gap: 6px; align-items: center; justify-content: center; }
+
 .bvg-carousel-track { position: relative; }
 .bvg-carousel-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
 .bvg-carousel-slide.is-active { position: relative; opacity: 1; pointer-events: auto; }
@@ -662,18 +676,13 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
 .bvg-carousel-slide .bvg-image-slot-img { width: 100%; height: auto; object-fit: initial; display: block; }
 .bvg-carousel-btn {
   display: flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px; border-radius: 999px;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg);
+  width: 32px; height: 32px;
+  border: none; background: none;
   color: var(--color-text-secondary);
-  cursor: pointer; transition: border-color 0.15s, color 0.15s;
-  flex-shrink: 0;
-  margin-top: 200px;
-  position: sticky;
-  top: 200px;
+  cursor: pointer; transition: color 0.15s;
+  padding: 0;
 }
-.bvg-carousel-btn:hover { border-color: var(--color-accent-primary); color: var(--color-accent-primary); }
-.bvg-carousel-dots { display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 16px; }
+.bvg-carousel-btn:hover { color: var(--color-accent-primary); }
 .bvg-carousel-dot {
   width: 6px; height: 6px; border-radius: 999px;
   background: var(--color-border);
@@ -747,6 +756,7 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
   font-family: var(--font-sans); font-size: 13px; line-height: 1.5;
   color: var(--color-text-secondary);
   margin-top: 20px;
+  max-width: 880px;
 }
 .bvg-process-note-icon { flex-shrink: 0; opacity: 0.5; margin-top: 1px; }
 

@@ -1,14 +1,15 @@
 ---
 interface Props {
   label?: string;
+  objectPosition?: string;
 }
-const { label } = Astro.props;
+const { label, objectPosition } = Astro.props;
 const isImage = label && (label.startsWith('/') || /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i.test(label));
 ---
 
 <div class="bvg-image-slot">
   {isImage
-    ? <img src={label} alt="" class="bvg-image-slot-img" loading="lazy" decoding="async" />
+    ? <img src={label} alt="" class="bvg-image-slot-img" loading="lazy" decoding="async" style={objectPosition ? `object-position: ${objectPosition}` : undefined} />
     : label && <div class="bvg-image-slot-inner">{label}</div>
   }
 </div>

@@ -43,7 +43,7 @@ const experience = [
       </p>
 
       <div class="bvg-hero-ctas" data-animate style="animation-delay: 220ms">
-        <a href="/resume.pdf" download class="bvg-btn-primary">
+        <a href="/resume.pdf" download="Bruna-Viza-Gomes-resume.pdf" class="bvg-btn-primary">
           Download Resume
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
@@ -71,12 +71,15 @@ const experience = [
             cardBody={entry.data.cardBody}
             tags={entry.data.tags}
             role={entry.data.role}
+            coverImage={entry.data.coverImage}
+            coverImagePosition={entry.data.coverImagePosition}
             wide={i === 0}
             light={i === 0}
           />
         ))}
       </div>
 
+      {/* Additional Projects — hidden for now
       <div class="bvg-section-head bvg-section-head--sub">
         <h2 class="bvg-section-title">Additional Projects</h2>
       </div>
@@ -90,11 +93,14 @@ const experience = [
             cardBody={entry.data.cardBody}
             tags={entry.data.tags}
             role={entry.data.role}
+            coverImage={entry.data.coverImage}
+            coverImagePosition={entry.data.coverImagePosition}
             wide={i === 0}
             light={i === 0}
           />
         ))}
       </div>
+      */}
     </section>
 
     <!-- Experience -->
