@@ -148,7 +148,7 @@ if (d.sections) {
               <div class="bvg-eyebrow">Phase {String(pi + 1).padStart(2, '0')}</div>
               <h2 class="bvg-phase-title">{phase.group}</h2>
             </div>
-            <div class="bvg-numbered-list">
+            <div class={`bvg-numbered-list${d.sectionGrid ? ' is-grid' : ''}`}>
               {phase.sections.map(s => (
                 <div class="bvg-numbered" data-animate>
                   <div class="bvg-numbered-head">
@@ -193,6 +193,14 @@ if (d.sections) {
             </div>
           </section>
         ))}
+        {d.carouselImages && d.carouselImages.length > 0 && (
+          <section class="bvg-cs-carousel-section" aria-label="Design output">
+            <div class="bvg-eyebrow">Design Output</div>
+            <div class="bvg-cs-carousel-wrap">
+              <Carousel images={d.carouselImages} id={`carousel-${entry.slug}-output`} />
+            </div>
+          </section>
+        )}
       </>
     ) : (
       <!-- Stub -->
