@@ -179,8 +179,7 @@ if (d.sections) {
             <div class="bvg-numbered-list">
               {phase.chunks.map(chunk => (
                 chunk.type === 'row' ? (
-                  <>
-                    <div class="bvg-numbered-row">
+                  <div class="bvg-numbered-row">
                       {chunk.sections.map(s => (
                         <div class="bvg-numbered" data-animate>
                           <div class="bvg-numbered-head">
@@ -210,20 +209,19 @@ if (d.sections) {
                               <MasonryGrid images={s.processImages} id={`masonry-${entry.slug}-${s.number}`} />
                             </div>
                           )}
+                          {s.processNote && (
+                            <div class="bvg-process-note">
+                              <svg class="bvg-process-note-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="12" y1="8" x2="12" y2="12"/>
+                                <line x1="12" y1="16" x2="12.01" y2="16"/>
+                              </svg>
+                              <span>{s.processNote}</span>
+                            </div>
+                          )}
                         </div>
                       ))}
                     </div>
-                    {chunk.processNotes.map(note => (
-                      <div class="bvg-process-note">
-                        <svg class="bvg-process-note-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                          <circle cx="12" cy="12" r="10"/>
-                          <line x1="12" y1="8" x2="12" y2="12"/>
-                          <line x1="12" y1="16" x2="12.01" y2="16"/>
-                        </svg>
-                        <span>{note}</span>
-                      </div>
-                    ))}
-                  </>
                 ) : (
                   <div class="bvg-numbered" data-animate>
                     <div class="bvg-numbered-head">
