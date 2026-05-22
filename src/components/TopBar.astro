@@ -2,7 +2,7 @@
 const path = Astro.url.pathname;
 const isWork = path === '/' || path.startsWith('/work/');
 const isAbout = path === '/about' || path === '/about/';
-const isContact = path === '/contact' || path === '/contact/';
+// const isContact = path === '/contact' || path === '/contact/';
 ---
 
 <header class="bvg-topbar">
@@ -12,7 +12,7 @@ const isContact = path === '/contact' || path === '/contact/';
     <nav class="bvg-nav" id="mobile-nav" aria-label="Primary">
       <a class={`bvg-nav-item${isWork ? ' is-active' : ''}`} href="/">Work</a>
       <a class={`bvg-nav-item${isAbout ? ' is-active' : ''}`} href="/about">About</a>
-      <a class={`bvg-nav-item${isContact ? ' is-active' : ''}`} href="/contact">Contact</a>
+      {/* <a class={`bvg-nav-item${isContact ? ' is-active' : ''}`} href="/contact">Contact</a> */}
     </nav>
 
     <button class="bvg-theme-toggle" aria-label="Toggle theme">
