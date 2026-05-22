@@ -12,6 +12,7 @@ const section = z.object({
   bullets: z.array(bullet).optional(),
   imageLabel: z.string().optional(),
   processImages: z.array(z.string()).optional(),
+  processNote: z.string().optional(),
 });
 
 const persona = z.object({
