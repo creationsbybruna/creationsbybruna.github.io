@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import EyebrowTag from '../../components/EyebrowTag.astro';
 import ImageSlot from '../../components/ImageSlot.astro';
 import Carousel from '../../components/Carousel.astro';
+import MasonryGrid from '../../components/MasonryGrid.astro';
 import PersonaCard from '../../components/PersonaCard.astro';
 import ProblemBlock from '../../components/ProblemBlock.astro';
 import PasswordGate from '../../components/PasswordGate.astro';
@@ -17,15 +18,42 @@ const d = entry.data;
 
 // Group sections by their 'group' field for phase rendering
 type Section = NonNullable<typeof d.sections>[number];
-const phaseGroups: { group: string; sections: Section[] }[] = [];
+type Chunk =
+  | { type: 'single'; section: Section }
+  | { type: 'row'; sections: Section[]; processNotes: string[] };
+
+function toChunks(sections: Section[]): Chunk[] {
+  const chunks: Chunk[] = [];
+  let i = 0;
+  while (i < sections.length) {
+    if (sections[i].sideBy) {
+      const rowSections: Section[] = [];
+      while (i < sections.length && sections[i].sideBy) {
+        rowSections.push(sections[i]);
+        i++;
+      }
+      const notes = [...new Set(rowSections.map(s => s.processNote).filter(Boolean) as string[])];
+      chunks.push({ type: 'row', sections: rowSections, processNotes: notes });
+    } else {
+      chunks.push({ type: 'single', section: sections[i] });
+      i++;
+    }
+  }
+  return chunks;
+}
+
+const phaseGroups: { group: string; sections: Section[]; chunks: Chunk[] }[] = [];
 if (d.sections) {
   for (const section of d.sections) {
     const last = phaseGroups[phaseGroups.length - 1];
     if (last && last.group === section.group) {
       last.sections.push(section);
     } else {
-      phaseGroups.push({ group: section.group, sections: [section] });
+      phaseGroups.push({ group: section.group, sections: [section], chunks: [] });
     }
+  }
+  for (const pg of phaseGroups) {
+    pg.chunks = toChunks(pg.sections);
   }
 }
 ---
@@ -149,40 +177,116 @@ if (d.sections) {
               <h2 class="bvg-phase-title">{phase.group}</h2>
             </div>
             <div class="bvg-numbered-list">
-              {phase.sections.map(s => (
-                <div class="bvg-numbered" data-animate>
-                  <div class="bvg-numbered-head">
-                    <span class="bvg-numbered-num">[{s.number}]</span>
-                  </div>
-                  <h3 class="bvg-numbered-title">{s.title}</h3>
-                  <div class="bvg-numbered-body">
-                    {s.paragraphs?.map(p => <p>{p}</p>)}
-                    {s.bullets && s.bullets.length > 0 && (
-                      <ul class="bvg-solution-list">
-                        {s.bullets.map(([label, body]) => (
-                          <li>
-                            <span class="bvg-bullet-label">{label}.</span>
-                            {' '}{body}
-                          </li>
-                        ))}
-                      </ul>
+              {phase.chunks.map(chunk => (
+                chunk.type === 'row' ? (
+                  <>
+                    <div class="bvg-numbered-row">
+                      {chunk.sections.map(s => (
+                        <div class="bvg-numbered" data-animate>
+                          <div class="bvg-numbered-head">
+                            <span class="bvg-numbered-num">[{s.number}]</span>
+                          </div>
+                          <h3 class="bvg-numbered-title">{s.title}</h3>
+                          <div class="bvg-numbered-body">
+                            {s.paragraphs?.map(p => <p>{p}</p>)}
+                            {s.bullets && s.bullets.length > 0 && (
+                              <ul class="bvg-solution-list">
+                                {s.bullets.map(([label, body]) => (
+                                  <li>
+                                    <span class="bvg-bullet-label">{label}.</span>
+                                    {' '}{body}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                          </div>
+                          {s.imageLabel && (
+                            <div class="bvg-numbered-image">
+                              <ImageSlot label={s.imageLabel} />
+                            </div>
+                          )}
+                          {s.processImages && s.processImages.length > 0 && (
+                            <div class="bvg-numbered-masonry">
+                              <MasonryGrid images={s.processImages} id={`masonry-${entry.slug}-${s.number}`} />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                    {chunk.processNotes.map(note => (
+                      <div class="bvg-process-note">
+                        <svg class="bvg-process-note-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="8" x2="12" y2="12"/>
+                          <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>{note}</span>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div class="bvg-numbered" data-animate>
+                    <div class="bvg-numbered-head">
+                      <span class="bvg-numbered-num">[{chunk.section.number}]</span>
+                    </div>
+                    <h3 class="bvg-numbered-title">{chunk.section.title}</h3>
+                    <div class="bvg-numbered-body">
+                      {chunk.section.paragraphs?.map(p => <p>{p}</p>)}
+                      {chunk.section.bullets && chunk.section.bullets.length > 0 && (
+                        <ul class="bvg-solution-list">
+                          {chunk.section.bullets.map(([label, body]) => (
+                            <li>
+                              <span class="bvg-bullet-label">{label}.</span>
+                              {' '}{body}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                    {chunk.section.imageLabel && (
+                      <div class="bvg-numbered-image">
+                        <ImageSlot label={chunk.section.imageLabel} />
+                      </div>
+                    )}
+                    {chunk.section.processImages && chunk.section.processImages.length > 0 && (
+                      <div class="bvg-numbered-masonry">
+                        <MasonryGrid images={chunk.section.processImages} id={`masonry-${entry.slug}-${chunk.section.number}`} />
+                      </div>
+                    )}
+                    {chunk.section.processNote && (
+                      <div class="bvg-process-note">
+                        <svg class="bvg-process-note-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                          <circle cx="12" cy="12" r="10"/>
+                          <line x1="12" y1="8" x2="12" y2="12"/>
+                          <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                        <span>{chunk.section.processNote}</span>
+                      </div>
                     )}
                   </div>
-                  {s.imageLabel && (
-                    <div class="bvg-numbered-image">
-                      <ImageSlot label={s.imageLabel} />
-                    </div>
-                  )}
-                  {s.processImages && s.processImages.length > 0 && (
-                    <div class="bvg-numbered-carousel">
-                      <Carousel images={s.processImages} id={`carousel-${entry.slug}-${s.number}`} />
-                    </div>
-                  )}
-                </div>
+                )
               ))}
             </div>
           </section>
         ))}
+
+        {d.masonryImages && d.masonryImages.length > 0 && (
+          <section class="bvg-cs-masonry-section" aria-label="Design output">
+            <div class="bvg-eyebrow">Design Output</div>
+            <div class="bvg-cs-masonry-wrap">
+              <MasonryGrid images={d.masonryImages} id={`masonry-${entry.slug}-output`} />
+            </div>
+          </section>
+        )}
+
+        {d.carouselImages && d.carouselImages.length > 0 && (
+          <section class="bvg-cs-carousel-section" aria-label="Design output">
+            <div class="bvg-eyebrow">Design Output</div>
+            <div class="bvg-cs-carousel-wrap">
+              <Carousel images={d.carouselImages} id={`carousel-${entry.slug}-output`} />
+            </div>
+          </section>
+        )}
       </>
     ) : (
       <!-- Stub -->

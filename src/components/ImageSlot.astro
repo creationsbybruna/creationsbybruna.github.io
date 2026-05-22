@@ -3,8 +3,12 @@ interface Props {
   label?: string;
 }
 const { label } = Astro.props;
+const isImage = label && (label.startsWith('/') || /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i.test(label));
 ---
 
 <div class="bvg-image-slot">
-  {label && <div class="bvg-image-slot-inner">{label}</div>}
+  {isImage
+    ? <img src={label} alt="" class="bvg-image-slot-img" loading="lazy" decoding="async" />
+    : label && <div class="bvg-image-slot-inner">{label}</div>
+  }
 </div>

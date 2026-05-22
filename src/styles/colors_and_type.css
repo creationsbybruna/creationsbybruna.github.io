@@ -103,17 +103,32 @@
   --color-tag-border-light:   rgba(237,216,122,0.1882);
 }
 
-/* -------------- LIGHT THEME (contact page only) -------------- */
+/* -------------- LIGHT THEME -------------- */
 :root[data-theme="light"] {
-  --color-bg:                 #E8D9C3;
-  --color-surface:            #DFC9B0;
-  --color-surface-elevated:   #D4BA9D;
+  --color-bg:                 #F7EDDC;
+  --color-surface:            #EDD8BC;
+  --color-surface-elevated:   #DFC09A;
+  --color-border:             #C8A070;
+
+  --color-text-primary:       #1C0C06;
+  --color-text-secondary:     #8A6040;
+  --color-text-muted:         #C8A070;
+
+  --color-accent-primary:     #4A5CFA;
+  --color-accent-secondary:   #6B1212;
+  --color-accent-highlight:   #EDD87A;
+  --color-accent-cool:        #A8C4E8;
+
+  --color-tag-fg-light:       #6B1212;
+  --color-tag-bg-light:       rgba(107,18,18,0.0706);
+  --color-tag-border-light:   rgba(107,18,18,0.1569);
 }
 
 /* ============================================================
    Semantic element styles
    ============================================================ */
 html { color-scheme: dark; }
+html[data-theme="light"] { color-scheme: light; }
 body {
   margin: 0;
   background: var(--color-bg);
