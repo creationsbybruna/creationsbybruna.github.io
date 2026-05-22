@@ -1,0 +1,171 @@
+---
+import ImageSlot from './ImageSlot.astro';
+
+interface Props {
+  images: string[];
+  id: string;
+}
+
+const { images, id } = Astro.props;
+const multiple = images.length > 1;
+const count = images.length;
+
+const cols = count <= 1 ? 1 : count <= 3 ? count : count <= 5 ? 2 : count <= 9 ? 3 : 4;
+
+const isRealImage = (src: string) =>
+  src.startsWith('/') || /\.(avif|webp|jpg|jpeg|png|gif|svg)$/i.test(src);
+---
+
+<!-- Desktop: masonry grid -->
+<div
+  class="bvg-masonry"
+  id={`${id}-grid`}
+  style={`--masonry-cols: ${cols}`}
+  data-images={JSON.stringify(images.filter(isRealImage))}
+>
+  {images.map((label, i) => (
+    <div
+      class={`bvg-masonry-item${isRealImage(label) ? ' is-clickable' : ''}`}
+      data-index={i}
+    >
+      <ImageSlot label={label} />
+    </div>
+  ))}
+</div>
+
+<!-- Lightbox (desktop only) -->
+<div class="bvg-lightbox" id={`${id}-lightbox`} aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image lightbox">
+  <div class="bvg-lightbox-backdrop"></div>
+  <button class="bvg-lightbox-close" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <button class="bvg-lightbox-nav bvg-lightbox-prev" aria-label="Previous image">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="19" y1="12" x2="5" y2="12"/><polyline points="11,18 5,12 11,6"/>
+    </svg>
+  </button>
+  <div class="bvg-lightbox-stage">
+    <img class="bvg-lightbox-img" src="" alt="" />
+  </div>
+  <button class="bvg-lightbox-nav bvg-lightbox-next" aria-label="Next image">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="13,6 19,12 13,18"/>
+    </svg>
+  </button>
+  <div class="bvg-lightbox-counter"></div>
+</div>
+
+<!-- Mobile: carousel -->
+<div class="bvg-masonry-carousel" id={id} data-count={images.length}>
+  <div class="bvg-carousel-inner">
+    {multiple && (
+      <button class="bvg-carousel-btn bvg-carousel-prev" aria-label="Previous image" data-carousel={id}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="19" y1="12" x2="5" y2="12"/>
+          <polyline points="11,18 5,12 11,6"/>
+        </svg>
+      </button>
+    )}
+    <div class="bvg-carousel-viewport">
+      <div class="bvg-carousel-track">
+        {images.map((label, i) => (
+          <div class={`bvg-carousel-slide${i === 0 ? ' is-active' : ''}`} data-index={i}>
+            <ImageSlot label={label} />
+          </div>
+        ))}
+      </div>
+    </div>
+    {multiple && (
+      <button class="bvg-carousel-btn bvg-carousel-next" aria-label="Next image" data-carousel={id}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="13,6 19,12 13,18"/>
+        </svg>
+      </button>
+    )}
+  </div>
+
+  {multiple && (
+    <div class="bvg-carousel-dots">
+      {images.map((_, i) => (
+        <button class={`bvg-carousel-dot${i === 0 ? ' is-active' : ''}`} aria-label={`Go to image ${i + 1}`} data-carousel={id} data-dot={i} />
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  // ── Mobile carousel ────────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>('.bvg-masonry-carousel').forEach(el => {
+    const id = el.id;
+    if (!id) return;
+    const slides = el.querySelectorAll<HTMLElement>('.bvg-carousel-slide');
+    const dots = el.querySelectorAll<HTMLElement>('.bvg-carousel-dot');
+    let current = 0;
+    function goTo(index: number) {
+      slides[current].classList.remove('is-active');
+      current = ((index % slides.length) + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+    }
+    el.querySelector('.bvg-carousel-prev')?.addEventListener('click', () => goTo(current - 1));
+    el.querySelector('.bvg-carousel-next')?.addEventListener('click', () => goTo(current + 1));
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+  });
+
+  // ── Desktop lightbox ───────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>('.bvg-masonry[data-images]').forEach(grid => {
+    const gridId = grid.id;
+    const lightbox = document.getElementById(gridId.replace('-grid', '-lightbox'));
+    if (!lightbox) return;
+
+    const srcs: string[] = JSON.parse(grid.dataset.images || '[]');
+    if (!srcs.length) return;
+
+    const img = lightbox.querySelector<HTMLImageElement>('.bvg-lightbox-img')!;
+    const counter = lightbox.querySelector<HTMLElement>('.bvg-lightbox-counter')!;
+    let current = 0;
+
+    function open(index: number) {
+      if (window.matchMedia('(max-width: 639px)').matches) return;
+      current = ((index % srcs.length) + srcs.length) % srcs.length;
+      img.src = srcs[current];
+      counter.textContent = `${current + 1} / ${srcs.length}`;
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      lightbox.querySelector<HTMLElement>('.bvg-lightbox-close')?.focus();
+    }
+
+    function close() {
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      img.src = '';
+    }
+
+    function prev() { open(current - 1); }
+    function next() { open(current + 1); }
+
+    grid.querySelectorAll<HTMLElement>('.bvg-masonry-item.is-clickable').forEach(item => {
+      item.addEventListener('click', () => {
+        const index = srcs.indexOf(
+          item.querySelector<HTMLImageElement>('img')?.getAttribute('src') || ''
+        );
+        open(index >= 0 ? index : 0);
+      });
+    });
+
+    lightbox.querySelector('.bvg-lightbox-backdrop')?.addEventListener('click', close);
+    lightbox.querySelector('.bvg-lightbox-close')?.addEventListener('click', close);
+    lightbox.querySelector('.bvg-lightbox-prev')?.addEventListener('click', prev);
+    lightbox.querySelector('.bvg-lightbox-next')?.addEventListener('click', next);
+
+    document.addEventListener('keydown', e => {
+      if (lightbox.getAttribute('aria-hidden') === 'true') return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+  });
+</script>
