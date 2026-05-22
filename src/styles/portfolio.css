@@ -300,7 +300,8 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
   border-bottom: 1px solid var(--color-border);
 }
 .bvg-card-industry {
-  position: absolute; top: 14px; left: 14px;
+  display: inline-block;
+  align-self: flex-start;
   font-family: var(--font-sans); font-weight: 700; font-size: 9px;
   letter-spacing: 0.160em; text-transform: uppercase;
   color: var(--color-text-primary);

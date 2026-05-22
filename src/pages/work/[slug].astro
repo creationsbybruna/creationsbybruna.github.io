@@ -106,7 +106,7 @@ if (d.sections) {
 
     <!-- Cover image -->
     <div class="bvg-cs-cover-image" data-animate="fade">
-      <ImageSlot label={`${entry.slug} · cover · 16:9`} />
+      <ImageSlot label={d.coverImage ?? `${entry.slug} · cover · 16:9`} />
     </div>
 
     {d.fullCase ? (
