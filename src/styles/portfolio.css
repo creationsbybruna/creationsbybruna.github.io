@@ -653,26 +653,27 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
 
 /* -------------------- Process carousel -------------------- */
 .bvg-numbered-carousel { margin-top: 24px; max-width: 880px; }
-.bvg-carousel { position: relative; }
-.bvg-carousel-track { position: relative; aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden; border: 1px solid var(--color-border); }
-.bvg-carousel-slide { position: absolute; inset: 0; transition: opacity 0.25s ease-out; }
-.bvg-carousel-slide[aria-hidden="true"] { opacity: 0; pointer-events: none; }
-.bvg-carousel-slide[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
-.bvg-carousel-controls {
-  display: flex; align-items: center; justify-content: center;
-  gap: 12px; margin-top: 16px;
-}
+.bvg-carousel-inner { display: flex; align-items: flex-start; gap: 12px; }
+.bvg-carousel-viewport { flex: 1; border-radius: 14px; border: 1px solid var(--color-border); overflow: hidden; }
+.bvg-carousel-track { position: relative; }
+.bvg-carousel-slide { position: absolute; top: 0; left: 0; width: 100%; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+.bvg-carousel-slide.is-active { position: relative; opacity: 1; pointer-events: auto; }
+.bvg-carousel-slide .bvg-image-slot { height: auto; }
+.bvg-carousel-slide .bvg-image-slot-img { width: 100%; height: auto; object-fit: initial; display: block; }
 .bvg-carousel-btn {
   display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 999px;
+  width: 40px; height: 40px; border-radius: 999px;
   border: 1px solid var(--color-border);
   background: var(--color-bg);
   color: var(--color-text-secondary);
   cursor: pointer; transition: border-color 0.15s, color 0.15s;
   flex-shrink: 0;
+  margin-top: 200px;
+  position: sticky;
+  top: 200px;
 }
 .bvg-carousel-btn:hover { border-color: var(--color-accent-primary); color: var(--color-accent-primary); }
-.bvg-carousel-dots { display: flex; gap: 6px; align-items: center; }
+.bvg-carousel-dots { display: flex; gap: 6px; align-items: center; justify-content: center; margin-top: 16px; }
 .bvg-carousel-dot {
   width: 6px; height: 6px; border-radius: 999px;
   background: var(--color-border);
@@ -680,6 +681,10 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
   transition: background 0.15s, transform 0.15s;
 }
 .bvg-carousel-dot.is-active { background: var(--color-accent-primary); transform: scale(1.4); }
+
+/* Standalone carousel section */
+.bvg-cs-carousel-section { padding-top: 64px; }
+.bvg-cs-carousel-wrap { margin-top: 24px; }
 
 /* Next case study */
 .bvg-cs-next { display: flex; flex-direction: column; gap: 16px; padding-top: 96px; }
@@ -836,6 +841,7 @@ html[data-theme="light"] .bvg-card.is-light:hover .bvg-card-arrow { color: #A8C4
   .bvg-meta-item { padding-right: 18px; margin-right: 18px; }
   .bvg-nav { gap: 16px; }
   .bvg-phase-title { font-size: 32px; }
+  .bvg-numbered-list.is-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
