@@ -9,16 +9,17 @@ interface Props {
   tags: string[];
   role: string;
   coverImage?: string;
+  coverImagePosition?: string;
   wide?: boolean;
   light?: boolean;
 }
 
-const { slug, industry, cardTitle, cardBody, tags, role, coverImage, wide = false, light = false } = Astro.props;
+const { slug, industry, cardTitle, cardBody, tags, role, coverImage, coverImagePosition, wide = false, light = false } = Astro.props;
 ---
 
 <a href={`/work/${slug}`} class={`bvg-card${wide ? ' is-wide' : ''}${light ? ' is-light' : ''}`}>
   <div class="bvg-card-image">
-    <ImageSlot label={coverImage ?? `${slug} · cover`} />
+    <ImageSlot label={coverImage ?? `${slug} · cover`} objectPosition={coverImagePosition} />
   </div>
   <div class="bvg-card-body">
     <span class="bvg-card-industry">{industry}</span>

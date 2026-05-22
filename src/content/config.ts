@@ -51,6 +51,7 @@ const work = defineCollection({
     useCases: z.array(useCase).optional(),
     sections: z.array(section).optional(),
     coverImage: z.string().optional(),
+    coverImagePosition: z.string().optional(),
     masonryImages: z.array(z.string()).optional(),
     carouselImages: z.array(z.string()).optional(),
     sectionGrid: z.boolean().optional(),
