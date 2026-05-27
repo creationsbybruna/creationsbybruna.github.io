@@ -63,7 +63,7 @@ const experience = [
       </div>
 
       <div class="bvg-card-grid" data-animate-group>
-        {caseStudies.map((entry, i) => (
+        {caseStudies.map((entry) => (
           <CaseStudyCard
             slug={entry.slug}
             industry={entry.data.industry}
@@ -73,19 +73,16 @@ const experience = [
             role={entry.data.role}
             coverImage={entry.data.coverImage}
             coverImagePosition={entry.data.coverImagePosition}
-            wide={i === 0}
-            light={i === 0}
           />
         ))}
       </div>
 
-      {/* Additional Projects — hidden for now
       <div class="bvg-section-head bvg-section-head--sub">
         <h2 class="bvg-section-title">Additional Projects</h2>
       </div>
 
       <div class="bvg-card-grid" data-animate-group>
-        {additionalProjects.map((entry, i) => (
+        {additionalProjects.map((entry) => (
           <CaseStudyCard
             slug={entry.slug}
             industry={entry.data.industry}
@@ -95,12 +92,9 @@ const experience = [
             role={entry.data.role}
             coverImage={entry.data.coverImage}
             coverImagePosition={entry.data.coverImagePosition}
-            wide={i === 0}
-            light={i === 0}
           />
         ))}
       </div>
-      */}
     </section>
 
     <!-- Experience -->
